@@ -14,9 +14,8 @@ RUN npm install -g @angular/cli
 
 # Limpa o cache do npm
 RUN npm cache clean --force
-
 # Expõe a porta 5050 do container
 EXPOSE 5050
 
 # Comando para rodar o servidor de desenvolvimento do Angular em modo de produção
-CMD ["ng", "serve", "--host=0.0.0.0", "--port=5050", "--configuration=production"]
+CMD ["npm run build && npm run serve:ssr",]

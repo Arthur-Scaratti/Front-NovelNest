@@ -6,13 +6,13 @@ import { ListChaptersResponse } from '../models/listchapters';
 import { chapterContent } from '../models/chaptercontent';
 import { Observable } from 'rxjs';
 import { comentario } from '../models/comment';
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class ApicallService {
   private apiUrlRequest: string = '';
-  private url = 'http://backend:5000';
-  //private url = 'http://localhost:5000';
+  private url = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
   //////////////////////////////////////////////////////////////////////
