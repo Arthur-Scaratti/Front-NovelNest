@@ -12,7 +12,6 @@ import { comentario } from '../models/comment';
 export class ApicallService {
   private apiUrlRequest: string = '';
   private url = 'http://backend:5000';
-  //private url = 'http://localhost:5000';
 
   constructor(private http: HttpClient) {}
   //////////////////////////////////////////////////////////////////////
