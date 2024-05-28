@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
+:root {
+  /* Light mode colors */
+  --background-color: #222222;
+  --header-color: #181818;
+  --toolbar-color: rgba(11, 10, 10, 0.75);
+  --lines-color: #ad3b3b;
+  --lines2-color: #ad0000;
+  --z-color: #201f1f;
+  --z-border-color: #e2e2e2;
+  --link-color: #ff7d7d;
+  --suport-color: #e2e2e2;
+  --back-scroll-bar: #e2e2e200;
+  --scroll-bar: #ff7d7d;
+  --button-color: #271818;
+  --gradient-color-1: #ad3b3b;
+  --gradient-color-2: #ad0000;
+  --border-gradient: linear-gradient(
+    to left,
+    var(--gradient-color-1),
+    var(--gradient-color-2)
+  );
+   
+    /////////FONTES/////////
+  
+  --font-rubik: 'Rubik';
+  --font-lato: 'Lato';
+  --font-crimson: 'Crimson Text';
+  --font-plex-sans: 'IBM Plex Sans';
+  --font-josefin-sans: 'Josefin Sans';
+  --font-libre-baskerville: 'Libre Baskerville';
+  --font-lora: 'Lora';
+  --font-merriweather: 'Merriweather';
+  --font-noto-sans: 'Noto Sans';
+  --font-open-sans: 'Open Sans';
+  --font-pt-serif: 'PT Serif';
+  --font-oswald: 'Oswald';
+  --font-source-serif: 'Source Serif 4';
+  --font-roboto: 'Roboto';
+
+  --font-title: var(--font-libre-baskerville);
+  --font-text: var(--font-lato);
+
+  --font-comment-color: #ff6881;
+  --text-light-color: #e2e2e2;
+  --text-dark-color: #0B0A0A;
+}
+
+
+
+
+.light-mode {
+  /* Dark mode colors */
+  --background-color: #181818;
+  --text-color: #ffffff;
+  --header-color: #282828;
+  --button-color: #1e90ff;
+  --border-gradient: linear-gradient(
+    to right,
+    #ff00c8,
+    #96ffde
+  );
+}
+
+body {
+  background-color: var(--background-color);
+
+  color: var(--text-light-color);
+  h1 {
+    color: var(--text-light-color);
+    text-align: center;
+  }
+  h2 {
+    color: var(--text-light-color);
+    text-align: center;
+    font-size: medium;
+  }
+  a {
+    color: var(--text-light-color);
+    text-decoration: none;
+    &:hover {
+      color: var(--link-color);
+    }
+  }
+  p {
+    color: var(--text-light-color);
+    margin: 5px;
+  }
+  header,
+  footer,
+  article,
+  nav,
+  aside {
+    padding: 1em;
+  }
+
+  .home-page-text {
+    color: var(--text-light-color);
+    font-weight: bold;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+  }
+  #main {
+    display: flex;
+    min-height: calc(100vh - 40vh);
+    > article {
+      flex: 1;
+    }
+    > nav,
+    > aside {
+      flex: 0 0 25vw;
+    }
+    > nav {
+      order: -1;
+    }
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  #main {
+    display: flex;
+    flex-direction: column; /* Alterando para uma coluna em dispositivos móveis */
+  }
+  nav,
+  aside {
+    flex: 0 0 auto; /* Permitindo que eles ajustem seu tamanho automaticamente */
+    width: 100%; /* Garantindo que ocupem toda a largura disponível */
+    height: auto; /* Permitindo ajuste de altura automático */
+    max-height: 200px; /* Ajuste a altura máxima conforme necessário */
+  }
+  article {
+    display: flex;
+    flex-direction: column; /* Alinha os itens verticalmente */
+    justify-content: center; /* Centraliza os itens verticalmente */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    margin-left: 0; /* Removendo margem à esquerda */
+    width: 100%; /* Garantindo que ocupe toda a largura disponível */
+  }
+}
+
+/////////////////////////TOOLTIP(MULTIPLE COMPONENTS USAGE////////////////////////////
+app-tooltip {
+  position: fixed;
+  z-index: 1000;
+}
+/////////////////////////////////////////////////////////////////////////////////////

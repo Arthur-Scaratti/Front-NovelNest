@@ -1,0 +1,50 @@
+<div class="carousel">
+  <div class="title-carousel">
+    <h1>Recently Uploaded</h1>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item left">
+      <a href="home/{{ novels[leftIndex].url_name }}">
+        <img [src]="'assets/images/' + novels[leftIndex].url_name + '.jpg'" />
+        <p>{{ novels[leftIndex].name }}</p>
+      </a>
+    </div>
+    <div class="carousel-item left2">
+      <a href="home/{{ novels[leftIndex2].url_name }}">
+        <img [src]="'assets/images/' + novels[leftIndex2].url_name + '.jpg'" />
+        <p>{{ novels[leftIndex2].name }}</p>
+      </a>
+    </div>
+    <div class="carousel-item center">
+      <a href="home/{{ novels[centerIndex].url_name }}"
+        ><img
+          [src]="'assets/images/' + novels[centerIndex].url_name + '.jpg'"
+        />
+        <p>{{ novels[centerIndex].name }}</p>
+      </a>
+    </div>
+    <div class="carousel-item right">
+      <a href="home/{{ novels[rightIndex].url_name }}">
+        <img [src]="'assets/images/' + novels[rightIndex].url_name + '.jpg'" />
+        <p>{{ novels[rightIndex].name }}</p>
+      </a>
+    </div>
+    <div class="carousel-item right2">
+      <a href="home/{{ novels[rightIndex2].url_name }}">
+        <img [src]="'assets/images/' + novels[rightIndex2].url_name + '.jpg'" />
+        <p>{{ novels[rightIndex2].name }}</p>
+      </a>
+    </div>
+    <div class="carousel-item right3">
+      <a href="home/{{ novels[rightIndex3].url_name }}">
+        <img [src]="'assets/images/' + novels[rightIndex3].url_name + '.jpg'" />
+        <p>{{ novels[rightIndex3].name }}</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button class="carousel-button prev" (click)="prev()">&#10094;</button>
+    <button class="carousel-button next" (click)="next()">&#10095;</button>
+  </div>
+</div>

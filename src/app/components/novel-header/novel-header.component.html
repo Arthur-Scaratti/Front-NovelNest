@@ -1,0 +1,50 @@
+<div class="novelHead">
+  <div class="content">
+    <img
+      [src]="'/assets/images/' + urlName + '.jpg'"
+      alt="{{ novelName }}"
+      class="novel-image"
+    />
+    <div class="novelDetails">
+      <h1>{{ novelName }}</h1>
+      <div class="descript">
+        <h2>Synopsis:</h2>
+        <div
+          class="text-container"
+          [class.expand]="expanded"
+          (click)="toggleExpand()">
+          <p>{{ description }}</p>
+          <ng-content></ng-content>
+        </div>
+        <button (click)="toggleExpand()">
+          {{ expanded ? 'Read Less' : 'Read More...' }}
+        </button>
+      </div>
+      <div class="autor">
+        <h2>Autor: </h2>
+        <h3>{{ autor }}</h3>
+      </div>
+      
+      <div class="tags">
+        <h2>Tags: </h2>
+        <div class="tag-itens">
+          <ng-container *ngFor="let tag of tags">
+            <a [href]="'/novels/' + tag.tag_name">
+              <li>{{ tag.tag_name }}</li>
+            </a>
+          </ng-container>
+        </div>
+        
+      </div>
+      <div class="chapterCount" >
+        <h2>Chapter Count: </h2>
+        <h3>{{nro_capitulos_en}}</h3>
+        
+      </div>
+      <div class="status" >
+        <h2>Status: </h2>
+        <h3>{{status}}</h3>
+      </div>
+    </div>
+  </div>
+</div>

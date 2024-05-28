@@ -1,0 +1,28 @@
+<div class="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item left">
+      <a href="home/{{ novels[leftIndex].url_name }}">
+        <img [src]="'assets/images/' + novels[leftIndex].url_name + '.jpg'" />
+        <p>{{ novels[leftIndex].name }}</p>
+      </a>
+    </div>
+    <div class="carousel-item center">
+      <a href="home/{{ novels[centerIndex].url_name }}"
+        ><img
+          [src]="'assets/images/' + novels[centerIndex].url_name + '.jpg'"
+        />
+        <p>{{ novels[centerIndex].name }}</p>
+      </a>
+    </div>
+    <div class="carousel-item right">
+      <a href="home/{{ novels[rightIndex].url_name }}">
+        <img [src]="'assets/images/' + novels[rightIndex].url_name + '.jpg'" />
+        <p>{{ novels[rightIndex].name }}</p>
+      </a>
+    </div>
+  </div>
+  <div class="buttons">
+    <button class="carousel-button prev" (click)="prev()">&#10094;</button>
+    <button class="carousel-button next" (click)="next()">&#10095;</button>
+  </div>
+</div>

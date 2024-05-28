@@ -1,0 +1,8 @@
+<div *ngIf="description && autor && tags" class="tooltip">
+    <h2>{{name}}</h2>
+    <p><strong>Description:</strong> {{ description }}</p>
+    <p><strong>Author:</strong> {{ autor }}</p>
+    <p><strong>Tags:</strong> {{ tags ? tags.join(', ') : '' }}</p>
+    <p><strong>Chapter Count:</strong> {{nro_capitulos_en}}</p>
+    <p><strong>Status:</strong> {{status}}</p>
+</div>

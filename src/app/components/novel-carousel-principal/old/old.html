@@ -1,0 +1,9 @@
+<div class="carousel">
+  <h1>Recent Uploads</h1>
+  <div class="carousel-images">
+    <a *ngFor="let novel of novels" href="novels/{{novel.url_name}}">
+      <img [src]="'assets/images/' + novel.url_name + '.jpg'" />
+      <p>{{novel.name}}</p></a
+    >
+  </div>
+</div>

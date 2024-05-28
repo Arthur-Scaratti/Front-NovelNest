@@ -1,0 +1,22 @@
+.tooltip {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--z-color);
+    border: 1px solid var(--lines-color);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    max-height: fit-content;
+  }
+  p {
+    padding-left: 5px;
+    max-height: 150px; /* altura máxima de 15 linhas */
+    overflow: hidden;
+  }
+  h2{
+    padding: 2px;
+    padding-left: 5px;
+    text-align: left;
+  }

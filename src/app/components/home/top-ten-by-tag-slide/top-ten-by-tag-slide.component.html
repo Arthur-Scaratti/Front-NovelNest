@@ -1,0 +1,31 @@
+<div class="carousel">
+  <div class="selector">
+    <div class="title">
+      <h1>
+        Top In
+        <select id="tagSelector" (change)="onTagChange($event)">
+          <option *ngFor="let tag of tags" [value]="tag">{{ tag }}</option>
+        </select>
+      </h1>
+    </div>
+  </div>
+  <div class="carousel-images" *ngIf="selectedTag" #carouselImages>
+    <a *ngFor="let novel of novels" [href]="['/home/' + novel.url_name]">
+      <img [src]="'assets/images/' + novel.url_name + '.jpg'" 
+      (mouseenter)="showTooltip(novel, $event)"
+      (mouseleave)="hideTooltip()"
+      />
+      <p>{{ novel.name }}</p>
+    </a>
+  </div>
+</div>
+<app-tooltip
+  *ngIf="tooltipVisible && tooltipData"
+  [name]="tooltipData.name"
+  [description]="tooltipData.description"
+  [autor]="tooltipData.autor"
+  [tags]="tooltipData.tags"
+  [status]="tooltipData.status"
+  [nro_capitulos_en]="tooltipData.nro_capitulos_en"
+  [ngStyle]="{ top: tooltipPosition.top, left: tooltipPosition.left }"
+></app-tooltip>

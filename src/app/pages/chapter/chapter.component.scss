@@ -1,0 +1,165 @@
+.novelnav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid;
+  border-image: var(--border-gradient); /* gradiente linear para a borda */
+  border-image-slice: 1;
+  height: 70px;
+  width: 100%;
+}
+
+#novelnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  width: 75%;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  h2 {
+    color: var(--text-light-color);
+    font-size: larger;
+    margin: 0;
+    font-family: var(--font-title);
+    width: auto;
+  }
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-light-color);
+    font-size: medium;
+    text-align: center;
+    margin: 0;  
+    width: auto;
+  }
+}
+
+.fire-logo {
+  margin: 0 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation-links {
+  display: flex;
+  align-items: center;
+}
+
+.navigation-links a {
+  margin: 0 20px;
+}
+
+.navigation-links .nextprevious {
+  background: none;
+  border: none;
+}
+
+.navigation-links .nextprevious svg {
+  width: 35px;
+  height: 35px;
+  background: none;
+  transition: transform 0.3s ease;
+}
+
+.navigation-links .nextprevious svg:hover {
+  filter: brightness(120%);
+  cursor: pointer;
+}
+
+h1 {
+  width: 60%;
+  max-width: 700px;
+  text-align: left;
+  margin: 15px;
+  font-family: var(--font-title);
+} 
+#chapterContent {
+  width: 60%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+p{
+  font-family: var(--font-text);
+  margin: 15px;
+  letter-spacing: 1px;
+}
+@media screen and (max-width: 1050px) {
+  h1 {
+    max-width: 70%;
+  }
+  #chapterContent {
+    width: 70%;
+    max-width: 70%;
+  }
+  .fire-logo {
+    margin: 0%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .navigation-links a {
+    margin: 0 0px;
+    margin-right: auto;
+  }
+
+  #novelnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    width: 75%;
+    max-width: 75%;
+  }
+  #novelnav {
+    a {
+      font-size: medium;
+      text-align: center;
+      margin: 0;
+    }
+    h2 {
+      font-size: 15px;
+    }
+  }
+}
+
+
+@media screen and (max-width: 950px) {
+  h1 {
+    max-width: 80%;
+  }
+  #chapterContent {
+    width: 80%;
+    max-width: 80%;
+  }
+  #novelnav {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    width: 85%;
+    max-width: 85%;
+    a {
+      font-size: medium;
+      text-align: center;
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  h1 {
+    margin-left: 10px;
+    max-width: 90%;
+  }
+  #chapterContent {
+    width: 95%;
+    max-width: 95%;
+  }
+  #novelnav {
+    h2 {
+      font-size: 13px;
+      padding-right: 10px;
+    }
+  }
+}

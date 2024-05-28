@@ -1,0 +1,44 @@
+<div class="div"><h1>Catalog</h1></div>
+<div class="buttons">
+  <div class="tag-buttons">
+    <button
+      *ngFor="let tag of tags"
+      (click)="filterNovelsByTag(tag)"
+      [class.selected]="tag === selectedTag"
+    >
+      {{ tag }}
+    </button>
+  </div>
+  <div class="alphabet-buttons">
+    <button
+      *ngFor="let letter of alphabet"
+      (click)="filterNovelsByLetter(letter)"
+      [class.selected]="letter === selectedLetter"
+    >
+      {{ letter }}
+    </button>
+  </div>
+</div>
+<div class="grid-container" [style.grid-template-rows]="gridTemplateRows">
+  <div *ngFor="let novel of filteredNovels; let i = index" class="grid-item">
+    <a href="home/{{ novel.url_name }}">
+      <img
+        [src]="'assets/images/' + novel.url_name + '.jpg'"
+        alt="{{ novel.name }}"
+        (mouseenter)="showTooltip(novel, $event)"
+        (mouseleave)="hideTooltip()"
+      />
+    </a>
+    <p>{{ novel.name }}</p>
+  </div>
+</div>
+<app-tooltip
+  *ngIf="tooltipVisible && tooltipData"
+  [name]="tooltipData.name"
+  [description]="tooltipData.description"
+  [autor]="tooltipData.autor"
+  [tags]="tooltipData.tags"
+  [status]="tooltipData.status"
+  [nro_capitulos_en]="tooltipData.nro_capitulos_en"
+  [ngStyle]="{ top: tooltipPosition.top, left: tooltipPosition.left }"
+></app-tooltip>

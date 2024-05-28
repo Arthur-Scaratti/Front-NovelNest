@@ -1,0 +1,70 @@
+<div class="options-container">
+  <div class="options">
+    <div class="font-options">
+      <span>Font: </span>
+      <select [(ngModel)]="font" (change)="applyStyle()">
+        <option value="var(--font-rubik)">Rubik</option>
+        <option value="var(--font-lato)">Lato</option>
+        <option value="var(--font-crimson)">Crimson Text</option>
+        <option value="var(--font-ples-sans)">Plex Sans</option>
+        <option value="var(--font-josefin-sans)">Josefin Sans</option>
+        <option value="var(--font-ibre-baskerville)">Libre Baskerville</option>
+        <option value="var(--font-lora)">Lora</option>
+        <option value="var(--font-merriweather)">Merriweather</option>
+        <option value="var(--font-noto-sans)">Noto Sans</option>
+        <option value="var(--font-open-sans)">Open Sans</option>
+        <option value="var(--font-pt-serif)">PT Serif</option>
+        <option value="var(--font-oswald)">Oswald</option>
+        <option value="var(--font-source-serif)">Source Serif 4</option>
+        <option value="var(--font-roboto)">Roboto</option>
+        <option value="Quicksand">Quicksand</option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
+      </select>
+    </div>
+
+    <div class="font-size-options">
+      <span>Font Size: </span>
+      <input
+        class="slider"
+        type="range"
+        id="fontSize"
+        name="fontSize"
+        min="14"
+        max="26"
+        step="1"
+        [(ngModel)]="fontSize"
+        (change)="applyStyle()"
+      />
+    </div>
+
+    <div class="space-options">
+      <span>Line Space: </span>
+      <input
+        class="slider"
+        type="range"
+        id="lineHeight"
+        name="lineHeight"
+        min="1"
+        max="2.5"
+        step="0.1"
+        [(ngModel)]="lineHeight"
+        (change)="applyStyle()"
+      />
+    </div>
+
+    <div class="color-options">
+      <span>Font Color: </span>
+      <select [(ngModel)]="color" (change)="applyStyle()">
+        <option value="gray">Cinza</option>
+        <option value="white">Branca</option>
+        <option value="black">Preta</option>
+      </select>
+    </div>
+
+    <div class="reset">
+      <button class="reset-button" (click)="[resetStyles()]">
+        <span> Reset </span>
+      </button>
+    </div>
+  </div>
+</div>

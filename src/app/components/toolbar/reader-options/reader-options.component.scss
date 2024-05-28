@@ -1,0 +1,110 @@
+.options {
+  background-color: var(--z-color);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  div {
+    margin: 5%;
+  }
+}
+
+/* Estilos para cada seção de opções */
+.font-options,
+.font-size-options,
+.space-options,
+.color-options,
+.reset {
+  margin: 2px;
+}
+
+/* Estilos para os spans de descrição */
+.options span {
+  font-weight: bold;
+  font-family: var(--font-title);
+  font-size: 18px;
+}
+
+/* Estilos para o botão de reset */
+.reset-button {
+  border: none;
+  padding: 2px 3px;
+  cursor: pointer;
+}
+
+/* Estilos para os selects */
+select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 5px;
+  background: none;
+  color: var(--text-light-color);
+  border-color: var(--lines-color);
+}
+span {
+  font-size: 13px;
+}
+select option {
+  background-color: var(--background-color);
+}
+/* Estilos para os inputs do tipo range */
+input[type="range"] {
+  width: 100%;
+}
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 7px;
+  border-radius: 5px;
+  background-color: var(--lines-color);
+  outline: none;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: var(--suport-color);
+  cursor: pointer;
+  border: 2px solid var(--lines-color);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.reset-button {
+  width: 100%;
+  background: none;
+  color: var(--text-light-color);
+  border: 2px solid;
+  border-color: var(--lines-color);
+  border-radius: 5px;
+}
+@media screen and (max-width: 767px) {
+  .sidebar,
+  .optionsbar {
+    width: 100%; /* Ajusta a largura para ocupar toda a tela */
+  }
+
+  .options-container {
+    flex-direction: column; /* Organiza as opções em uma única coluna */
+  }
+
+  .options {
+    flex-wrap: wrap; /* Permite que os itens da opção sejam organizados em várias linhas se necessário */
+  }
+
+  select,
+  input[type="range"] {
+    max-width: 100%; /* Ajusta a largura máxima dos elementos select e range */
+  }
+}

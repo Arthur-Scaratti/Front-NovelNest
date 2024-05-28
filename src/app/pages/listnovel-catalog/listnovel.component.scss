@@ -1,0 +1,22 @@
+#listnovel {
+  background-color: var(--background-color);
+}
+#main {
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.list {
+  max-width: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+

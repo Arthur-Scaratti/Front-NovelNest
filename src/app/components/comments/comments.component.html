@@ -1,0 +1,12 @@
+<div class="container_comments">
+ <p > Send a comment if you find any errors! </p>
+  <textarea
+    [(ngModel)]="content"
+    class="comment"
+    cols="70"
+    rows="7"
+    name="comment"
+  ></textarea>
+  <br />
+  <button (click)="enviarComentario()">Send</button>
+</div>

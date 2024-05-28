@@ -1,0 +1,30 @@
+<div class="breadcrumb">
+  <div class="contentbreadcrumb">
+    @for (parte of partes; track $index) {
+      @switch ($index) {
+        @case (0) {}
+        @case (1) {
+          <a href="/{{ partesmin[1] }}">{{ parte }}</a>
+          <span> > </span>
+        }
+        @case (2) {
+          <a href="/{{ partesmin[1] }}/{{ partesmin[2] }}"> {{ novelName }}</a>
+          <span> > </span>
+        }
+        @case (3) {
+          <a> {{ parte }}</a>
+          <span> > </span>
+        }
+        @case (4) {
+          <a
+            href="/{{ partesmin[1] }}/{{ partesmin[2] }}/{{ partesmin[3] }}/{{
+              partesmin[4]
+            }}"
+          >
+            {{ parte }}</a
+          >
+        }
+      }
+    }
+  </div>
+</div>

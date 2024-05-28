@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.search-container {
+  width: 100%;
+  max-width: 250px; /* Limita a largura máxima do contêiner */
+  position: relative;
+  height: 100%; /* Adiciona posicionamento relativo ao contêiner */
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  background-color: var(--suport-color);
+  color: var(--header-color);
+  padding: 5px;
+  border-radius: 25px;
+  border: 1px solid var(--lines2-color);
+}
+
+.search input,
+.search button {
+  background: transparent;
+  color: inherit;
+  border: none;
+  outline: none;
+  font-family: var(--font-text);
+}
+
+.search__input {
+  width: 240px; /* Tamanho fixo de 240px */
+  padding: 5px;
+}
+
+.search__button {
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 25px;
+  cursor: pointer;
+  transition: color 0.25s;
+}
+
+.search__button:hover {
+  color: #e3e3e3;
+}
+
+::placeholder {
+  font: inherit;
+  color: rgb(7, 0, 40);
+}
+
+.search-results {
+  position: absolute;
+  width: 100%; /* Mesma largura da barra de pesquisa */
+  max-height: 600px; /* Altura máxima de 600px */
+  background-color: rgb(37, 37, 37); /* Cor de fundo preta */
+  color: white; /* Texto branco para contraste */
+  border: 1px solid #ccc; /* Borda para separar visualmente */
+  overflow-y: auto; /* Scroll vertical para o caso de muitos resultados */
+  margin-top: 10px; /* Espaço entre a barra de pesquisa e os resultados */
+  border-radius: 0 0 10px 10px; /* Bordas arredondadas na parte inferior */
+  padding: 10px;
+  padding-left: 30px;
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+}
+
+@media screen and (max-width: 700px) {
+    .search-container {
+      width: 100%;
+      max-width: 200px; /* Limita a largura máxima do contêiner */
+      position: relative;
+      height: 100%; /* Adiciona posicionamento relativo ao contêiner */
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    .search-container {
+      width: 100%;
+      max-width: 125px; /* Limita a largura máxima do contêiner */
+      position: relative;
+      height: 100%; /* Adiciona posicionamento relativo ao contêiner */
+    }
+  }

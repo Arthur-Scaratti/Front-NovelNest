@@ -1,0 +1,22 @@
+<div #searchContainer class="search-container">
+  <form class="search" (submit)="filterNovels(); $event.preventDefault()">
+    <input 
+      type="text" 
+      placeholder="Search" 
+      class="search__input" 
+      [value]="searchQuery" 
+      (input)="onSearchQueryChange($event)" 
+    />
+    <button type="button" class="search__button" (click)="filterNovels()">
+      <i class="ri-search-2-line"></i>
+    </button>
+  </form>
+
+  <div *ngIf="isSearchActive" #searchResults class="search-results">
+    <ul>
+      <li *ngFor="let novel of filteredNovels">
+        <a href="home/{{novel.url_name}}">{{ novel.name }}</a>
+      </li>
+    </ul>
+  </div>
+</div>

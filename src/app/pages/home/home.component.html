@@ -1,0 +1,21 @@
+<div class="homeHead">
+  <div>
+    <!-- <app-novel-carousel [novels]="novels"></app-novel-carousel> -->
+  </div>
+</div>
+<div class="listers">
+  <div class="top-ten-by-tag">
+    <app-top-ten-by-tag-slide
+      [topByTags]="topTenByTag"
+    ></app-top-ten-by-tag-slide>
+  </div>
+
+  <div class="top-by-tag">
+    <app-top-by-tag-slide [novels]="topOneByTag"></app-top-by-tag-slide>
+  </div>
+
+  <div class="recent-uploaded">
+    <app-recent-uploaded-slide [novels]="recentUploaded">
+    </app-recent-uploaded-slide>
+  </div>
+</div>
