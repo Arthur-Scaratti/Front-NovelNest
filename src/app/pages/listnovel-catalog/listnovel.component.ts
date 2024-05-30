@@ -3,7 +3,7 @@ import { ApicallService } from '../../services/apicall.service';
 import { Novelnameurl } from '../../models/novelnameurl';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NovelsGridComponent } from '../../components/novels-grid/novels-grid.component';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-listnovel',

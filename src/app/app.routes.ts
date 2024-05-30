@@ -1,11 +1,17 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes} from '@angular/router';
 import { ListnovelComponent } from './pages/listnovel-catalog/listnovel.component';
 import { IndexnovelComponent } from './pages/indexnovel/indexnovel.component';
 import { ChapterComponent } from './pages/chapter/chapter.component';
 import { HomeComponent } from './pages/home/home.component';
+import { RegisterComponent } from './pages/register/register.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: { breadcrumb: 'Register'},
+  },
   {
     path: 'home',
     component: HomeComponent,

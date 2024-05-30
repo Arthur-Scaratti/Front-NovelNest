@@ -7,6 +7,7 @@ import { chapterContent } from '../models/chaptercontent';
 import { Observable } from 'rxjs';
 import { comentario } from '../models/comment';
 import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -71,5 +72,10 @@ export class ApicallService {
   getComment(urlName: string, capNro: number, language: string) {
     this.apiUrlRequest = `${this.url}/novels/${urlName}/${capNro}/${language}/comentario `;
     return this.http.get<comentario[]>(this.apiUrlRequest);
+  }
+
+  postRegister(formData: { name: string | null; email: string | null; password: string | null }): Observable<any> {
+    const apiUrlRequest = `${this.url}/auth/register`;
+    return this.http.post(apiUrlRequest, formData);
   }
 }
