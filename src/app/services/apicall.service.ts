@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Novelnameurl, TopByTag } from '../models/novelnameurl';
 import { TagsNovel } from '../models/listchapters';
 import { ListChaptersResponse } from '../models/listchapters';
 import { chapterContent } from '../models/chaptercontent';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { comentario } from '../models/comment';
 import { environment } from '../../environments/environment';
 
@@ -54,10 +54,28 @@ export class ApicallService {
 
   ////////////////////////////////////////////////////////////////////////
 
-  getChapterContent(urlName: string, capNro: number, language: string) {
-    this.apiUrlRequest = `${this.url}/novels/${urlName}/${capNro}/${language} `;
-    return this.http.get<chapterContent>(this.apiUrlRequest);
+  getChapterContent(urlName: string, capNro: number, language: string): Observable<any> {
+    const token = sessionStorage.getItem('authToken');
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+  
+    const apiUrlRequest = `${this.url}/novels/${urlName}/${capNro}/${language}`;
+    return this.http.get<any>(apiUrlRequest, { headers });
   }
+  
+  validateToken(): Observable<any> {
+    const token = sessionStorage.getItem('authToken');
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+
+    const apiUrlRequest = `${this.url}/auth/validate`;
+    return this.http.get<any>(apiUrlRequest, { headers });
+  }
+
 
   postComment(
     comentario: comentario,
@@ -78,4 +96,11 @@ export class ApicallService {
     const apiUrlRequest = `${this.url}/auth/register`;
     return this.http.post(apiUrlRequest, formData);
   }
+
+  postLogin(credentials: { email: string; password: string }): Observable<any> {
+    const apiUrlRequest = `${this.url}/auth/login`;
+    return this.http.post(apiUrlRequest, credentials);
+  }
+
+ 
 }

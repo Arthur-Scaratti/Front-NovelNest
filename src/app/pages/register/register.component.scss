@@ -1,0 +1,59 @@
+.register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ 
+    min-height: 640px;
+    justify-content: center;
+  .signup {
+    margin-top: 20px;
+  }
+    form {
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      padding-right: 80px;
+      label {
+        display: flex;
+        justify-content: right;
+        margin-bottom: 16px;
+        font-family: var(--font-title);
+        align-items: center;
+  
+        input {
+          margin-left: 8px;
+          border-radius: 5px;
+          border: none;
+          border: 2px solid var(--lines-color);
+          font-family: var(--font-title);
+          width: 224px;
+          height: 26px;
+  
+          // Estilo quando o input está focado
+          &:focus {
+            border-color: var(--link-color);
+            outline: none; // Remove o outline padrão do navegador
+            box-shadow: 0 0 5px var(--link-color); // Adiciona um leve glow ao redor do input
+          }
+        }
+      }
+  
+      button {
+        width: 100px;
+        background-color: var(--suport-color);
+        border-radius: 5px;
+        border: none;
+        border: 1px solid var(--lines-color);
+        margin-right: 10%;
+        align-self: center;
+        margin-left: 108px;
+        font-family: var(--font-title);
+      }
+      .message {
+        align-self: center;
+        text-align: center;
+        margin-top: 10px;
+      }
+    }
+  }
+  

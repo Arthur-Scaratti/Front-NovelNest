@@ -50,8 +50,8 @@ export class ChapterComponent {
       .subscribe((content) => {
         if (content && content.chapterLines) {
           this.content = content;
-          this.novelName = this.content.novelName;
-          this.title = this.content.chapterTitle;
+          this.novelName = this.content?.novelName;
+          this.title = this.content?.chapterTitle;
 
           this.previousUrl = this.getChapterUrl(parseInt(this.capNro, 10) - 1);
           this.nextUrl = this.getChapterUrl(parseInt(this.capNro, 10) + 1);

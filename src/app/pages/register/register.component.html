@@ -1,16 +1,20 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <label>
-      User Name:
-      <input type="text" formControlName="name">
-    </label>
-    <label>
-        Email:
-        <input type="text" formControlName="email">
-      </label>
-    <label>
-      Password:
-      <input type="password" formControlName="password">
-    </label>
-    <button type="submit">Registrar</button>
-  </form>
-  <div *ngIf="message">{{ message }}</div>
+<div class="register">
+  <div class="title"> <h1>Create a New Account:</h1></div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <label>
+          Username:
+          <input type="text" formControlName="name">
+        </label>
+        <label>
+            Email:
+            <input type="text" formControlName="email">
+          </label>
+        <label>
+          Password:
+          <input type="password" formControlName="password">
+        </label>
+        <button type="submit">Register</button>
+      </form>
+      <div class="message" *ngIf="message">{{ message }}</div>
+      <div class="signup" ><h4>Already have an account? <a href="/login">Log In</a></h4></div>
+ </div>

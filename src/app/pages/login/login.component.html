@@ -1,0 +1,18 @@
+
+  <div class="login">
+    <div class="title"> <h1>Log in:</h1></div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="message" *ngIf="messageFromRegister">{{ messageFromRegister }}</div>
+        <label>
+          Email:
+          <input type="text" formControlName="email">
+        </label>
+        <label>
+          Password:
+          <input type="password" formControlName="password">
+        </label>
+        <button type="submit">Log in</button>
+        <div class="message" *ngIf="message">{{ message }}</div>
+      </form>
+      <div class="signup" ><h4>Don't have an account? <a href="/register">Sign Up</a></h4></div>
+  </div>

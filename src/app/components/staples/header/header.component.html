@@ -20,7 +20,7 @@
 
     <div class="containerRight">
       <app-search-bar></app-search-bar>
-      <div class="user-logo">
+      <div class="user-logo" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
         <svg
           width="176px"
           height="176px"
@@ -48,6 +48,13 @@
             ></path>
           </g>
         </svg>
+        <div *ngIf="showOptions" class="options">
+          <div (click)="navigateTo('/login')">Login</div>
+          <div (click)="navigateTo('/register')">Register</div>
+        </div>
+        <div *ngIf="showOptionsLogged" class="options">
+          <div (click)="navigateTo('/library')">{{ userName }}</div>
+        </div>
       </div>
     </div>
   </div>
