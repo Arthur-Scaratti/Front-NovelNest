@@ -7,7 +7,7 @@
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr": "node dist/novelnest_0_2/server/server.mjs"
+    "serve:ssr": "node dist/novelnest_0_2/server/server.mjs --host 0.0.0.0"
   },
   "private": true,
   "dependencies": {
