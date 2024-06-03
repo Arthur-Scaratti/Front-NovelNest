@@ -10,9 +10,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class ReaderOptionsComponent {
   font: string = 'Noto Sans';
-  fontSize: any;
-  color: string = 'white';
-  lineHeight: string = '1.5';
+  fontSize: any = "16";
+  color: string = 'var(--text-light-color)';
+  lineHeight: string = '2';
   style: any;
   constructor() {}
 
@@ -41,10 +41,10 @@ export class ReaderOptionsComponent {
   }
 
   resetStyles() {
-    this.font = 'Open Sans';
-    this.fontSize = '20px';
-    this.color = 'white';
-    this.lineHeight = '1.5';
+    this.font = 'Noto Sans';
+    this.fontSize = '18';
+    this.color = 'var(--text-light-color)';
+    this.lineHeight = '2';
     this.applyStyle();
   }
 }

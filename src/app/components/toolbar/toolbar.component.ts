@@ -1,16 +1,10 @@
-import {
-  Component,
-  EventEmitter,
-  Output,
-  HostListener,
-  Input,
-} from '@angular/core';
+import { Component, EventEmitter, Output, HostListener } from '@angular/core';
 import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
 import { ChapterComponent } from '../../pages/chapter/chapter.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
-import { NgClass } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { ReaderOptionsComponent } from './reader-options/reader-options.component';
-import { ListChapters } from '../../models/listchapters';
+
 @Component({
   selector: 'app-toolbar',
   standalone: true,
@@ -19,7 +13,9 @@ import { ListChapters } from '../../models/listchapters';
     ChapterComponent,
     SideNavComponent,
     ReaderOptionsComponent,
+    NgFor
   ],
+  providers: [],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss',
 })
@@ -35,6 +31,10 @@ export class ToolbarComponent {
   isSidebarExpanded = false;
   isOptionbarExpanded = false;
   styles: any;
+  isLightTheme = false;
+  currentThemeClass: string = '';
+  currentBaseColorClass: string = '';
+  availableColors: string[] = ['red', 'blue', 'green', 'purple'];
 
   constructor(
     private router: Router,

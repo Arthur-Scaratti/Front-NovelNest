@@ -57,9 +57,9 @@
   position: absolute;
   width: 100%; /* Mesma largura da barra de pesquisa */
   max-height: 600px; /* Altura máxima de 600px */
-  background-color: rgb(37, 37, 37); /* Cor de fundo preta */
-  color: white; /* Texto branco para contraste */
-  border: 1px solid #ccc; /* Borda para separar visualmente */
+  background-color: var(--z-color);
+  color: var(--text-light-color); /* Texto branco para contraste */
+  border: 1px solid var(--z-border-color); /* Borda para separar visualmente */
   overflow-y: auto; /* Scroll vertical para o caso de muitos resultados */
   margin-top: 10px; /* Espaço entre a barra de pesquisa e os resultados */
   border-radius: 0 0 10px 10px; /* Bordas arredondadas na parte inferior */

@@ -4,11 +4,11 @@ import { SearchBarComponent } from '../../search-bar/search-bar.component';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { ApicallService } from '../../../services/apicall.service';
-
+import { ThemeComponent } from '../../theme/theme.component';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [BreadcrumbComponent, SearchBarComponent, NgIf],
+  imports: [BreadcrumbComponent, SearchBarComponent, NgIf, ThemeComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

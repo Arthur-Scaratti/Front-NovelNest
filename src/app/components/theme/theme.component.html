@@ -1,0 +1,6 @@
+<button (click)="toggleTheme()">Toggle Theme</button>
+
+<label for="color-select">Choose a base color:</label>
+<select id="color-select" (change)="onColorChange($event)">
+  <option *ngFor="let color of availableColors" [value]="color" [selected]="color === currentBaseColorClass">{{color}}</option>
+</select>
