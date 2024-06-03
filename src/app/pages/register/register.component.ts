@@ -6,10 +6,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { NgIf } from '@angular/common';
 import { ApicallService } from '../../services/apicall.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { inject } from '@angular/core';
 @Component({
   selector: 'app-register',
   standalone: true,

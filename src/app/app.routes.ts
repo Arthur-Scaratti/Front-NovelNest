@@ -17,7 +17,6 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    data: { breadcrumb: 'Login'},
   },
   {
     path: 'home',

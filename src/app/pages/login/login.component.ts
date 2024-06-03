@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { NgIf } from '@angular/common';
 import { ApicallService } from '../../services/apicall.service';
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -42,11 +41,11 @@ export class LoginComponent {
         (response) => {
           const token = response.token;
           console.log(token);
-
+          if (typeof window !== 'undefined' && 'sessionStorage') {
           sessionStorage.setItem('authToken', token);
-
+          }
           this.message = 'Login successful!';
-          this.router.navigate(['/home']);
+          window.location.href = '/home';
         },
         (error) => {
           this.message = 'Login failed. Please try again.';

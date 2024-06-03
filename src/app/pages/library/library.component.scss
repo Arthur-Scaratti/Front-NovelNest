@@ -1,0 +1,108 @@
+.historic{
+
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+ 
+}
+.grid-container {
+    max-width: 70%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding-top: 50px;
+    padding-bottom: 100px;
+  }
+  
+  .grid-item {
+    display: flex;
+    text-align: left;
+    max-width: 400px;
+
+    position: relative;
+  }
+  .details {
+    margin-left: 20px;
+    min-width: 200px;
+    
+    p{
+        font-size: 20px;
+    }
+    button{
+        cursor: pointer;
+        font-size: 20px;
+        color: var(--lines-color);
+        background-color: var(--z-color);
+        border-radius: 5px;
+        box-shadow: 2px 2px 3px rgba(255, 49, 49, 0.575);
+    }
+  }
+  .grid-item img {
+    width: 150px;
+    height: 206px;
+    border-radius: 10px;
+  }
+  
+  p {
+    font-size: 20px;
+    font-family: var(--font-text);
+  }
+  
+  .div {
+    border-bottom: 1px solid var(--lines-color);
+  }
+  h2{
+    font-size:x-large;
+    font-family: var(--font-title);
+    width: 100%;
+    height: fit-content;
+    margin-top: 50px;
+    padding: 1rem;
+    border-top: 2px solid var(--lines-color);
+    border-bottom: 2px solid var(--lines-color);
+  }
+  
+  @media screen and (max-width: 1500px) {
+    .grid-container {
+        max-width: 80%;
+        grid-template-columns: repeat(3, 1fr);
+      }
+    .grid-item img {
+        width: 130px;
+        height: 178px;
+        border-radius: 10px;
+      }
+  }
+  @media screen and (max-width: 1300px) {
+    .grid-container {
+        max-width: 80%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+  }
+
+  @media screen and (max-width: 900px) {
+    .grid-container {
+        max-width: 80%;
+        grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .grid-container {
+        max-width: 90%;
+      }
+    .grid-item img {
+        width: 110px;
+        height: 150px;
+        border-radius: 10px;
+      }
+      .details{
+        min-width: 150px;
+    
+        p {
+            font-size: 14px;
+            font-family: var(--font-text);
+          }
+      }
+  }

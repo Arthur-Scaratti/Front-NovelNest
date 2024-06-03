@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './reader-options.component.scss',
 })
 export class ReaderOptionsComponent {
-  font: string = 'Open Sans';
+  font: string = 'Noto Sans';
   fontSize: any;
   color: string = 'white';
   lineHeight: string = '1.5';

@@ -3,19 +3,19 @@ import { Injectable } from '@angular/core';
 import { Novelnameurl, TopByTag } from '../models/novelnameurl';
 import { TagsNovel } from '../models/listchapters';
 import { ListChaptersResponse } from '../models/listchapters';
-import { chapterContent } from '../models/chaptercontent';
-import { catchError, Observable, of } from 'rxjs';
+import { Observable} from 'rxjs';
 import { comentario } from '../models/comment';
 import { environment } from '../../environments/environment';
-
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
+   
 })
 export class ApicallService {
   private apiUrlRequest: string = '';
   private url = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
   //////////////////////////////////////////////////////////////////////
 
   getTags() {
@@ -55,7 +55,9 @@ export class ApicallService {
   ////////////////////////////////////////////////////////////////////////
 
   getChapterContent(urlName: string, capNro: number, language: string): Observable<any> {
-    const token = sessionStorage.getItem('authToken');
+    let token = sessionStorage.getItem('authToken');
+   
+    console.log (token);
     let headers = new HttpHeaders();
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
@@ -65,8 +67,24 @@ export class ApicallService {
     return this.http.get<any>(apiUrlRequest, { headers });
   }
   
+  getRecentAccess(): Observable<any> {
+    let token = sessionStorage.getItem('authToken');
+    console.log(token);
+    let headers = new HttpHeaders();
+    let apiUrlRequest;
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+      apiUrlRequest = `${this.url}/novels/library`;
+    } else {
+      return new Observable(); 
+    }
+    return this.http.get<any>(apiUrlRequest, { headers });
+  }
+
   validateToken(): Observable<any> {
-    const token = sessionStorage.getItem('authToken');
+    let token;
+      token = sessionStorage.getItem('authToken');
+  
     let headers = new HttpHeaders();
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ApicallService } from '../../services/apicall.service';
 import { Novelnameurl } from '../../models/novelnameurl';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CarouselComponent } from '../../components/novel-carousel-principal/novel-carousel.component';
 import { RecentUploadedComponent } from '../../components/novel-carousel-principal/recent-uploaded/recent-uploaded.component';
 import { RecentUploadedSlideComponent } from '../../components/home/recent-uploaded-slide/recent-uploaded-slide.component';

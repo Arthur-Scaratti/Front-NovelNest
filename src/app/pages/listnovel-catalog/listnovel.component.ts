@@ -4,7 +4,7 @@ import { Novelnameurl } from '../../models/novelnameurl';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NovelsGridComponent } from '../../components/novels-grid/novels-grid.component';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Inject } from '@angular/core';
 @Component({
   selector: 'app-listnovel',
   standalone: true,
