@@ -33,7 +33,7 @@ export class ChapterComponent {
   capNro$ = this.obterCapitulo.bind(this);
   language: string = 'EN';
   
-  api$ = (typeof window !== 'undefined' && this.urlName) ? 
+  content$ = (typeof window !== 'undefined' && this.urlName) ? 
   this.apicallservice
     .getChapterContent(this.urlName, this.capNro$(), this.language)
     .subscribe((content) => {
