@@ -33,13 +33,13 @@ export class ChapterComponent {
     private route: ActivatedRoute, 
     private router: Router
   ) 
-  {}
+  {if (typeof window === 'object' || typeof window !== 'undefined') {
+    this.style = JSON.parse(localStorage.getItem('chapter-style') ?? '{}');
+  }}
 
   ngOnInit(): void {
       this.obterCapitulo();
-    if (typeof window === 'object' || typeof window !== 'undefined') {
-      this.style = JSON.parse(localStorage.getItem('chapter-style') ?? '{}');
-    }
+    
   }
 
   obterCapitulo() {
