@@ -26,14 +26,14 @@
   display: flexbox;
   align-self: left;
   border-bottom: 1px solid var(--lines-color);
-} 
+}
 
 .alphabet-buttons button {
   margin: 5px;
 }
 
 .alphabet-buttons button.selected {
-  background-color:  var(--lines-color);
+  background-color: var(--lines-color);
   color: var(--text-dark-color);
 }
 

@@ -1,22 +1,32 @@
 <div class="register">
- 
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="title"> <h1>Create a New Account:</h1></div>
-        <label>
-          <p>Username:</p>
-          <input type="text" formControlName="name">
-        </label>
-        <label>
-          <p>Email:</p>
-          <input type="text" formControlName="email">
-        </label>
-        <label>
-          <p>Password:</p>
-          <input type="password" formControlName="password">
-        </label>
-        <button type="submit">Register</button>
-        <div class="message" *ngIf="message">{{ message }}</div>
-        <div class="signup" ><h4>Already have an account? <a href="/login">Log In</a></h4></div>
-      </form>
-      
- </div>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="title"><h1>Create a New Account:</h1></div>
+    <label>
+      <p>Username:</p>
+      <input
+        type="text"
+        formControlName="name"
+        id="username"
+        autocomplete="given-name"
+      />
+    </label>
+    <label>
+      <p>Email:</p>
+      <input
+        type="text"
+        formControlName="email"
+        id="email"
+        autocomplete="email"
+      />
+    </label>
+    <label>
+      <p>Password:</p>
+      <input type="password" formControlName="password" id="password" />
+    </label>
+    <button type="submit">Register</button>
+    <div class="message" *ngIf="message">{{ message }}</div>
+    <div class="signup">
+      <h4>Already have an account? <a href="/login">Log In</a></h4>
+    </div>
+  </form>
+</div>

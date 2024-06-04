@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   imports: [NgIf, NgStyle, NgClass, NgFor],
   templateUrl: './tooltip.component.html',
-  styleUrl: './tooltip.component.scss'
+  styleUrl: './tooltip.component.scss',
 })
 export class TooltipComponent {
   @Input() name?: string = '';
@@ -18,7 +18,6 @@ export class TooltipComponent {
 
   maxLines = 15;
   expanded = false;
-
 
   getDescriptionLines() {
     if (!this.description) return [];

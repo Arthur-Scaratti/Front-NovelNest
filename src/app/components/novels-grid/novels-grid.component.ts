@@ -5,18 +5,17 @@ import { ApicallService } from '../../services/apicall.service';
 import { TooltipComponent } from '../tooltip/tooltip.component';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 
-
 @Component({
   selector: 'app-novels-grid',
   standalone: true,
-  imports: [NgFor, NgIf ,TooltipComponent, NgStyle, RouterLink],
+  imports: [NgFor, NgIf, TooltipComponent, NgStyle, RouterLink],
   templateUrl: './novels-grid.component.html',
   styleUrls: ['./novels-grid.component.scss'],
 })
 export class NovelsGridComponent implements OnInit {
   @Input() novels: Novelnameurl[] = [];
   filteredNovels: Novelnameurl[] = [];
-  
+
   selectedLetter: string | null = '';
   alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   gridTemplateRows?: string;
@@ -25,14 +24,22 @@ export class NovelsGridComponent implements OnInit {
   tags: string[] = [];
 
   tooltipVisible: boolean = false;
-  tooltipData: { name: string, description: string, autor: string, tags: string[], status: string, nro_capitulos_en: number | string} | null = null;
-  tooltipPosition: { top: string, left: string } = { top: '0px', left: '0px' };
+  tooltipData: {
+    name: string;
+    description: string;
+    autor: string;
+    tags: string[];
+    status: string;
+    nro_capitulos_en: number | string;
+  } | null = null;
+  tooltipPosition: { top: string; left: string } = { top: '0px', left: '0px' };
   hoverTimeout: any;
   isDesktop: boolean = true;
 
-  constructor(private apicallservice: ApicallService, private router: Router) {
-    
-  }
+  constructor(
+    private apicallservice: ApicallService,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.filteredNovels = this.novels;
@@ -55,8 +62,10 @@ export class NovelsGridComponent implements OnInit {
 
   filterNovels() {
     this.filteredNovels = this.novels.filter((novel) => {
-      const matchesLetter = !this.selectedLetter || novel.name.startsWith(this.selectedLetter);
-      const matchesTag = !this.selectedTag || novel.tags.includes(this.selectedTag);
+      const matchesLetter =
+        !this.selectedLetter || novel.name.startsWith(this.selectedLetter);
+      const matchesTag =
+        !this.selectedTag || novel.tags.includes(this.selectedTag);
       return matchesLetter && matchesTag;
     });
     this.calculateRows();
@@ -67,8 +76,8 @@ export class NovelsGridComponent implements OnInit {
     this.filterNovels();
   }
 
-  filterNovelsByParam (tag: string | null){
-   this.filterNovelsByTag(tag);
+  filterNovelsByParam(tag: string | null) {
+    this.filterNovelsByTag(tag);
   }
 
   filterNovelsByTag(tag: string | null) {
@@ -83,12 +92,11 @@ export class NovelsGridComponent implements OnInit {
       rows += 1;
     }
     this.gridTemplateRows = `repeat(${rows}, 1fr)`;
-    
   }
 
   obterTags() {
     this.apicallservice.getTags().subscribe((tags) => {
-      this.tags = tags.map(tag => tag.tag_name);
+      this.tags = tags.map((tag) => tag.tag_name);
     });
   }
 

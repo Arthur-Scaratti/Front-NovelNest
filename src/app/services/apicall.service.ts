@@ -3,19 +3,19 @@ import { Injectable } from '@angular/core';
 import { Novelnameurl, TopByTag } from '../models/novelnameurl';
 import { TagsNovel } from '../models/listchapters';
 import { ListChaptersResponse } from '../models/listchapters';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { comentario } from '../models/comment';
 import { environment } from '../../environments/environment';
-import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
-   
 })
 export class ApicallService {
   private apiUrlRequest: string = '';
   private url = environment.apiUrl;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+  ) {}
   //////////////////////////////////////////////////////////////////////
 
   getTags() {
@@ -54,19 +54,23 @@ export class ApicallService {
 
   ////////////////////////////////////////////////////////////////////////
 
-  getChapterContent(urlName: string, capNro: number, language: string): Observable<any> {
+  getChapterContent(
+    urlName: string,
+    capNro: number,
+    language: string,
+  ): Observable<any> {
     let token = sessionStorage.getItem('authToken');
-   
-    console.log (token);
+
+    console.log(token);
     let headers = new HttpHeaders();
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
-  
+
     const apiUrlRequest = `${this.url}/novels/${urlName}/${capNro}/${language}`;
     return this.http.get<any>(apiUrlRequest, { headers });
   }
-  
+
   getRecentAccess(): Observable<any> {
     let token = sessionStorage.getItem('authToken');
     console.log(token);
@@ -76,15 +80,15 @@ export class ApicallService {
       headers = headers.set('Authorization', `Bearer ${token}`);
       apiUrlRequest = `${this.url}/novels/library`;
     } else {
-      return new Observable(); 
+      return new Observable();
     }
     return this.http.get<any>(apiUrlRequest, { headers });
   }
 
   validateToken(): Observable<any> {
     let token;
-      token = sessionStorage.getItem('authToken');
-  
+    token = sessionStorage.getItem('authToken');
+
     let headers = new HttpHeaders();
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
@@ -93,7 +97,6 @@ export class ApicallService {
     const apiUrlRequest = `${this.url}/auth/validate`;
     return this.http.get<any>(apiUrlRequest, { headers });
   }
-
 
   postComment(
     comentario: comentario,
@@ -110,7 +113,11 @@ export class ApicallService {
     return this.http.get<comentario[]>(this.apiUrlRequest);
   }
 
-  postRegister(formData: { name: string | null; email: string | null; password: string | null }): Observable<any> {
+  postRegister(formData: {
+    name: string | null;
+    email: string | null;
+    password: string | null;
+  }): Observable<any> {
     const apiUrlRequest = `${this.url}/auth/register`;
     return this.http.post(apiUrlRequest, formData);
   }
@@ -119,6 +126,4 @@ export class ApicallService {
     const apiUrlRequest = `${this.url}/auth/login`;
     return this.http.post(apiUrlRequest, credentials);
   }
-
- 
 }

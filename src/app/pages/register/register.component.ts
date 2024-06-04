@@ -9,7 +9,7 @@ import {
 import { NgIf } from '@angular/common';
 import { ApicallService } from '../../services/apicall.service';
 import { NavigationExtras, Router } from '@angular/router';
-import { inject } from '@angular/core';
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -25,10 +25,10 @@ export class RegisterComponent {
   constructor(
     private apicallservice: ApicallService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
   ) {
     this.registerForm = this.formBuilder.group({
-      name: new FormControl<string | null>('', Validators.required ),
+      name: new FormControl<string | null>('', Validators.required),
       email: new FormControl<string | null>('', Validators.required),
       password: new FormControl<string | null>('', Validators.required),
     });
@@ -41,16 +41,16 @@ export class RegisterComponent {
       this.apicallservice.postRegister(formData).subscribe(
         (response) => {
           this.message = 'Registration successful! You can now log in.';
-          // Passar a mensagem de sucesso como NavigationExtras
+
           const navigationExtras: NavigationExtras = {
-            queryParams: { message: this.message }
+            queryParams: { message: this.message },
           };
           this.router.navigate(['/login'], navigationExtras);
         },
         (error) => {
           this.message = 'Registration failed. Please try again.';
           console.error('Registration error', error);
-        }
+        },
       );
     } else {
       this.message = 'Please fill in all required fields.';

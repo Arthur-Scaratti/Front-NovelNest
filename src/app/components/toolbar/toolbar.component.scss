@@ -6,7 +6,11 @@
   width: 100%;
   height: 55px;
   border-top: 1px solid;
-  border-image: linear-gradient(to right, var(--gradient-color-1), var(--gradient-color-2));
+  border-image: linear-gradient(
+    to right,
+    var(--gradient-color-1),
+    var(--gradient-color-2)
+  );
   border-image-slice: 1;
   display: flex;
   justify-content: space-around;
@@ -56,9 +60,9 @@
   border-radius: 10px;
   left: 35%;
 }
-.sidebar{
+.sidebar {
   border-left: none;
-  h3{
+  h3 {
     font-family: var(--font-title);
   }
 }
@@ -72,7 +76,6 @@
 .sidebar.expanded {
   transform: translateY(0%);
 }
-
 
 .optionsbar.expandedOptions {
   transform: translateY(-0%);

@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ReaderOptionsComponent {
   font: string = 'Noto Sans';
-  fontSize: any = "16";
+  fontSize: any = '16';
   color: string = 'var(--text-light-color)';
   lineHeight: string = '2';
   style: any;

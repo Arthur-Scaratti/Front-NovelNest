@@ -7,9 +7,10 @@
   <div class="carousel-images" #carouselImages>
     <a *ngFor="let novel of novels" [href]="['/home/' + novel.url_name]">
       <h2>{{ novel.tag_name }}</h2>
-      <img [src]="'assets/images/' + novel.url_name + '.jpg'" 
-      (mouseenter)="showTooltip(novel, $event)"
-      (mouseleave)="hideTooltip()"
+      <img
+        [src]="'assets/images/' + novel.url_name + '.jpg'"
+        (mouseenter)="showTooltip(novel, $event)"
+        (mouseleave)="hideTooltip()"
       />
       <p>{{ novel.name }}</p>
     </a>

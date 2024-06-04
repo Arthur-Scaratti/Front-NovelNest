@@ -17,23 +17,26 @@ export class ListnovelComponent {
   novels: Novelnameurl[] = [];
   tag: string = '';
 
-  constructor(private apicallservice: ApicallService, private route: ActivatedRoute, private router: Router) {
+  constructor(
+    private apicallservice: ApicallService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
     this.obterListaNovels();
-  } 
-  
-   
-ngOnInit(): void {
-  this.route.paramMap.subscribe(params => {
-    const tagParam = params.get('tag');
-    if (tagParam) {
-      this.tag = decodeURIComponent(tagParam);
-    }
-  });
-}
+  }
 
-obterListaNovels() {
-  this.apicallservice
-    .getNovels()
-    .subscribe((novels) => (this.novels = novels));
-}
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      const tagParam = params.get('tag');
+      if (tagParam) {
+        this.tag = decodeURIComponent(tagParam);
+      }
+    });
+  }
+
+  obterListaNovels() {
+    this.apicallservice
+      .getNovels()
+      .subscribe((novels) => (this.novels = novels));
+  }
 }

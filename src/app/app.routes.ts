@@ -1,4 +1,4 @@
-import { Routes} from '@angular/router';
+import { Routes } from '@angular/router';
 import { ListnovelComponent } from './pages/listnovel-catalog/listnovel.component';
 import { IndexnovelComponent } from './pages/indexnovel/indexnovel.component';
 import { ChapterComponent } from './pages/chapter/chapter.component';
@@ -12,7 +12,7 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
-    data: { breadcrumb: 'Register'},
+    data: { breadcrumb: 'Register' },
   },
   {
     path: 'login',

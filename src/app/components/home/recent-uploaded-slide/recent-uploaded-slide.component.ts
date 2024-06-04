@@ -25,8 +25,15 @@ export class RecentUploadedSlideComponent implements AfterViewInit {
   novelName: any;
 
   tooltipVisible: boolean = false;
-  tooltipData: { name: string, description: string, autor: string, tags: string[], status: string, nro_capitulos_en: number | string} | null = null;
-  tooltipPosition: { top: string, left: string } = { top: '0px', left: '0px' };
+  tooltipData: {
+    name: string;
+    description: string;
+    autor: string;
+    tags: string[];
+    status: string;
+    nro_capitulos_en: number | string;
+  } | null = null;
+  tooltipPosition: { top: string; left: string } = { top: '0px', left: '0px' };
   hoverTimeout: any;
 
   isDesktop: boolean = true;

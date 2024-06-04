@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { NovelsGridComponent } from './novels-grid.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('NovelsGridComponent', () => {
   let component: NovelsGridComponent;
@@ -8,7 +9,8 @@ describe('NovelsGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NovelsGridComponent],
+      declarations: [],
+      imports: [HttpClientTestingModule, RouterTestingModule, NovelsGridComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NovelsGridComponent);

@@ -76,7 +76,6 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              
               "buildTarget": "novelnest_0_2:build:production"
             },
             "development": {

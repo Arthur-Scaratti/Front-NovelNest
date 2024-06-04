@@ -31,7 +31,7 @@
     color: var(--text-light-color);
     font-size: medium;
     text-align: center;
-    margin: 0;  
+    margin: 0;
     width: auto;
   }
 }
@@ -75,14 +75,14 @@ h1 {
   text-align: left;
   margin: 15px;
   font-family: var(--font-title);
-} 
+}
 #chapterContent {
   width: 60%;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
 }
-p{
+p {
   font-family: var(--font-text);
   margin: 15px;
   letter-spacing: 1px;
@@ -123,7 +123,6 @@ p{
     }
   }
 }
-
 
 @media screen and (max-width: 950px) {
   h1 {
