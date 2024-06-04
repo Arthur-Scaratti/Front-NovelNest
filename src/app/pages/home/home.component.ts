@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ApicallService } from '../../services/apicall.service';
 import { Novelnameurl } from '../../models/novelnameurl';
 import { CarouselComponent } from '../../components/novel-carousel-principal/novel-carousel.component';
@@ -24,38 +24,23 @@ import { TopByTag } from '../../models/novelnameurl';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  apicallservice = inject(ApicallService);
   novels: Novelnameurl[] = [];
   recentUploaded: Novelnameurl[] = [];
   topOneByTag: Novelnameurl[] = [];
   topTenByTag: TopByTag[] = [];
-
-  constructor(private apicallservice: ApicallService) {
-    this.obterListaNovels();
-    this.obterListaRecentUpload();
-    this.obterListaTopOneByTag();
-    this.obterListaTopTenByTag();
-  }
-
-  obterListaNovels() {
-    this.apicallservice
-      .getNovels()
-      .subscribe((novels) => (this.novels = novels));
-  }
-  obterListaRecentUpload() {
-    this.apicallservice
-      .getRecentUpload()
-      .subscribe((novels) => (this.recentUploaded = novels));
-  }
-
-  obterListaTopOneByTag() {
-    this.apicallservice
-      .getTopOneByTag()
-      .subscribe((data) => (this.topOneByTag = data));
-  }
-
-  obterListaTopTenByTag() {
-    this.apicallservice
-      .getTopTenByTag()
-      .subscribe((data) => (this.topTenByTag = data));
-  }
+  novels$ =  this.apicallservice
+  .getNovels()
+  .subscribe((novels) => (this.novels = novels));
+  recentUploaded$ = this.apicallservice
+  .getRecentUpload()
+  .subscribe((novels) => (this.recentUploaded = novels));
+  topOneByTag$ = this.apicallservice
+  .getTopOneByTag()
+  .subscribe((data) => (this.topOneByTag = data));
+  topTenByTag$ = this.apicallservice
+  .getTopTenByTag()
+  .subscribe((data) => (this.topTenByTag = data));
+  
+  constructor() {}
 }

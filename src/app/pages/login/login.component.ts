@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { ApicallService } from '../../services/apicall.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,26 +18,23 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  loginForm: FormGroup;
+  apicallservice = inject (ApicallService);
+  formBuilder = inject (FormBuilder);
+  route = inject (ActivatedRoute);
+  
+  loginForm: FormGroup = this.formBuilder.group({
+    email: new FormControl<string | null>('', { nonNullable: true }),
+    password: new FormControl<string | null>('', { nonNullable: true }),
+  });;
+
   message = '';
   messageFromRegister: string | null = '';
-  constructor(
-    private apicallservice: ApicallService,
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {
-    this.loginForm = this.formBuilder.group({
-      email: new FormControl<string | null>('', { nonNullable: true }),
-      password: new FormControl<string | null>('', { nonNullable: true }),
-    });
-  }
-  ngOnInit(): void {
-    // Receber a mensagem dos query params
-    this.route.queryParams.subscribe((params) => {
-      this.messageFromRegister = params['message'] || '';
-    });
-  }
+  messageFromRegister$ = this.route.queryParams.subscribe((params) => {
+    this.messageFromRegister = params['message'] || '';
+  });
+  
+  constructor() {}
+  
   onSubmit(): void {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;

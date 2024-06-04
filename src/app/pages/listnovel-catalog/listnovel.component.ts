@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ApicallService } from '../../services/apicall.service';
 import { Novelnameurl } from '../../models/novelnameurl';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NovelsGridComponent } from '../../components/novels-grid/novels-grid.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Inject } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
+
 @Component({
   selector: 'app-listnovel',
   standalone: true,
@@ -14,29 +14,22 @@ import { Inject } from '@angular/core';
   styleUrl: './listnovel.component.scss',
 })
 export class ListnovelComponent {
+  apicallservice = inject (ApicallService);
+  route = inject (ActivatedRoute);
+  
   novels: Novelnameurl[] = [];
+  novels$ =  this.apicallservice
+  .getNovels()
+  .subscribe((novels) => (this.novels = novels));
+ 
   tag: string = '';
+  tag$ = this.route.paramMap.subscribe((params) => {
+    const tagParam = params.get('tag');
+    if (tagParam) {
+      this.tag = decodeURIComponent(tagParam);
+    }
+  });
 
-  constructor(
-    private apicallservice: ApicallService,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {
-    this.obterListaNovels();
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      const tagParam = params.get('tag');
-      if (tagParam) {
-        this.tag = decodeURIComponent(tagParam);
-      }
-    });
-  }
-
-  obterListaNovels() {
-    this.apicallservice
-      .getNovels()
-      .subscribe((novels) => (this.novels = novels));
-  }
 }

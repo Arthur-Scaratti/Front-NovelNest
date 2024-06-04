@@ -55,7 +55,7 @@ export class ApicallService {
   ////////////////////////////////////////////////////////////////////////
 
   getChapterContent(
-    urlName: string,
+    urlName: string | null,
     capNro: number,
     language: string,
   ): Observable<any> {

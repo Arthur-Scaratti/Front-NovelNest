@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -19,14 +19,13 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
+  apicallservice = inject (ApicallService);
+  formBuilder = inject (FormBuilder);
+  router = inject (Router);
   registerForm: FormGroup;
   message = '';
 
-  constructor(
-    private apicallservice: ApicallService,
-    private formBuilder: FormBuilder,
-    private router: Router,
-  ) {
+  constructor() {
     this.registerForm = this.formBuilder.group({
       name: new FormControl<string | null>('', Validators.required),
       email: new FormControl<string | null>('', Validators.required),

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ApicallService } from '../../services/apicall.service';
 import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { chapterContent } from '../../models/chaptercontent';
@@ -16,46 +16,42 @@ import { CommentsComponent } from '../../components/comments/comments.component'
   styleUrl: './chapter.component.scss',
 })
 export class ChapterComponent {
+  apicallservice = inject (ApicallService);
+  route = inject (ActivatedRoute);
   content: chapterContent | null = null;
-  urlName: any;
   novelName: any;
-  language: string = 'EN';
-  capNro: any;
   title: any;
   previousUrl: string | null = null;
   nextUrl: string | null = null;
   styleSubscription: Subscription | undefined;
-  style: any;
   styleColor: any;
+  style: any = typeof window === 'object' || typeof window !== 'undefined' ? 
+              JSON.parse(localStorage.getItem('chapter-style') ?? '{}') : {};
+  urlName: string | null = (this.route.snapshot.paramMap.get('urlName'));
+  capNro: string = this.route.snapshot.paramMap.get('capNro') ?? '';
+  // redundância pra correção de bug onde ele não buscava o nro do capitulo corretamente
+  capNro$ = this.obterCapitulo.bind(this);
+  language: string = 'EN';
+  
+  api$ = (typeof window !== 'undefined' && this.urlName) ? 
+  this.apicallservice
+    .getChapterContent(this.urlName, this.capNro$(), this.language)
+    .subscribe((content) => {
+      if (content && content.chapterLines) {
+        this.content = content;
+        this.novelName = this.content?.novelName;
+        this.title = this.content?.chapterTitle;
 
-  constructor(
-    private apicallservice: ApicallService,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {
-    this.obterCapitulo();
-    if (typeof window === 'object' || typeof window !== 'undefined') {
-      this.style = JSON.parse(localStorage.getItem('chapter-style') ?? '{}');
-    }
-  }
+        this.previousUrl = this.getChapterUrl(this.capNro$() - 1);
+        this.nextUrl = this.getChapterUrl(this.capNro$() + 1);
+      }
+    }) : null;
 
-  ngOnInit(): void {}
+  constructor() { this.obterCapitulo(); }
 
-  obterCapitulo() {
-    this.urlName = this.route.snapshot.paramMap.get('urlName');
-    this.capNro = this.route.snapshot.paramMap.get('capNro');
-    this.apicallservice
-      .getChapterContent(this.urlName, this.capNro, this.language)
-      .subscribe((content) => {
-        if (content && content.chapterLines) {
-          this.content = content;
-          this.novelName = this.content?.novelName;
-          this.title = this.content?.chapterTitle;
-
-          this.previousUrl = this.getChapterUrl(parseInt(this.capNro, 10) - 1);
-          this.nextUrl = this.getChapterUrl(parseInt(this.capNro, 10) + 1);
-        }
-      });
+  obterCapitulo(): number {
+    this.capNro = this.route.snapshot.paramMap.get('capNro') ?? '';
+    return parseInt(this.capNro);
   }
 
   private getChapterUrl(capNumber: number): string {

@@ -1,4 +1,4 @@
-<div *ngIf="recentAccess.length > 0; else noData">
+<div *ngIf="recentAccess">
   <div class="historic">
     <h2>Recent Access</h2>
     <div class="grid-container" [style.grid-template-rows]="10">
@@ -33,7 +33,3 @@
     </div>
   </div>
 </div>
-
-<ng-template #noData>
-  <p>No recent access found.</p>
-</ng-template>
