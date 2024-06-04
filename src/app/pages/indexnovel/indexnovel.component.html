@@ -1,27 +1,31 @@
 <div class="index">
   <app-novel-header></app-novel-header>
   <div class="latest-chapters">
-   <div class="latest-title">
-    <h2>Latest Chapters: </h2>
-   </div>
+    <div class="latest-title">
+      <h2>Latest Chapters:</h2>
+    </div>
     <div class="latest-content">
-        @for(capitulo of latestChapters; track $index){
-          <li >
-            <a [href]="gerarHref(capitulo.cap_nro)">Chapter: {{ capitulo.cap_nro }}</a>
-          </li>
-        }
+      @for (capitulo of latestChapters; track $index) {
+        <li>
+          <a [href]="gerarHref(capitulo.cap_nro)"
+            >Chapter: {{ capitulo.cap_nro }}</a
+          >
+        </li>
+      }
     </div>
   </div>
   <h1>Chapter List</h1>
 
   <div id="main">
     <article>
- 
       <div class="gruposDeCapitulos">
         @for (grupo of gruposDeCapitulos; track index; let index = $index) {
           <h2 (click)="toggleLista(index)">
             Chapters {{ index * 100 + 1 }} - {{ (index + 1) * 100 }}
-            <span class="arrow" [class.expanded]="grupoAbertoIndex === index"></span>
+            <span
+              class="arrow"
+              [class.expanded]="grupoAbertoIndex === index"
+            ></span>
           </h2>
           @if (grupoAbertoIndex === index) {
             @for (capitulo of grupo.rows; track $index) {
@@ -39,9 +43,7 @@
     <aside></aside>
   </div>
 </div>
-<div *ngIf="!chapters">
-  Carregando...
-</div>
+<div *ngIf="!chapters">Carregando...</div>
 <!-- @for (grupo of gruposDeCapitulos; track $index) {
 
     <p> <a href="{{gerarHref(chapter.CAP_NRO)}}">{{gruposDeCapitulos[$index]}}</a> </p>

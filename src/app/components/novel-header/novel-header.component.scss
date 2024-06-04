@@ -50,7 +50,7 @@ h1 {
     font-size: 16px;
     padding: 0;
     margin: 0;
-  } 
+  }
 }
 .text-container {
   overflow: hidden;
@@ -63,7 +63,7 @@ h1 {
 .text-container.expand {
   max-height: fit-content;
   height: auto;
-  p{
+  p {
     padding: 0;
     margin: 0;
   }
@@ -80,20 +80,23 @@ h1 {
   padding: 0;
 }
 ////////////////////////////////////////////////
-.autor, .tags, .chapterCount, .status {
+.autor,
+.tags,
+.chapterCount,
+.status {
   display: flex;
   align-items: end;
 
   margin-top: 8px;
-  a{
+  a {
     padding-left: 8px;
     font-style: italic;
   }
-  h2{
+  h2 {
     margin: 0;
     text-align: end;
   }
-  h3{
+  h3 {
     margin: 0;
     padding-left: 8px;
     text-align: end;
@@ -102,11 +105,10 @@ h1 {
 }
 .tags {
   align-items: start;
-  h2{
+  h2 {
     text-align: start;
   }
   .tag-itens {
-   
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     align-items: center;
@@ -123,7 +125,7 @@ h1 {
   }
 
   li {
-    list-style:none;
+    list-style: none;
   }
 }
 //////////////////////////////////////////////
@@ -135,32 +137,31 @@ h1 {
   .content {
     width: 80%;
   }
-  h2{
+  h2 {
     font-size: 18px;
   }
-  h3{
+  h3 {
     font-size: 14px;
   }
 }
 
 @media screen and (max-width: 1100px) {
-.tags{
-  .tag-itens{
-    grid-template-columns: repeat(4, 1fr);
+  .tags {
+    .tag-itens {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 }
-}
-
 
 @media screen and (max-width: 900px) {
-h1{
-  font-size: 24px;
-}
-.tags{
-  .tag-itens{
-    grid-template-columns: repeat(3, 1fr);
+  h1 {
+    font-size: 24px;
   }
-}
+  .tags {
+    .tag-itens {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 }
 @media screen and (max-width: 800px) {
   .novel-image {
@@ -191,7 +192,7 @@ h1{
   }
   .tags {
     display: block;
-    .tag-itens{
+    .tag-itens {
       grid-template-columns: repeat(2, 1fr);
     }
   }

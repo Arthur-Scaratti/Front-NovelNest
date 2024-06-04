@@ -19,7 +19,10 @@ import { ViewportScroller } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   title = 'novelnest_0_2';
-  constructor(private router: Router, private viewportScroller: ViewportScroller) {}
+  constructor(
+    private router: Router,
+    private viewportScroller: ViewportScroller,
+  ) {}
 
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {

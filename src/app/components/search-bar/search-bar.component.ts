@@ -20,16 +20,17 @@ export class SearchBarComponent {
   @ViewChild('searchContainer') searchContainer!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
 
-  constructor(private apicallservice: ApicallService, private eRef: ElementRef) {
+  constructor(
+    private apicallservice: ApicallService,
+    private eRef: ElementRef,
+  ) {
     this.obterListaNovels();
   }
 
   obterListaNovels() {
-    this.apicallservice
-      .getNovels()
-      .subscribe((novels) => {
-        this.novels = novels;
-      });
+    this.apicallservice.getNovels().subscribe((novels) => {
+      this.novels = novels;
+    });
   }
 
   filterNovels() {
@@ -39,7 +40,7 @@ export class SearchBarComponent {
     }
     const query = this.searchQuery.toLowerCase();
     this.filteredNovels = this.novels.filter((novel) =>
-      novel.name.toLowerCase().includes(query)
+      novel.name.toLowerCase().includes(query),
     );
   }
 

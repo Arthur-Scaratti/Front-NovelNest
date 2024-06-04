@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApicallService } from '../../services/apicall.service';
-import { ActivatedRoute, RouterLink, Router, } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { chapterContent } from '../../models/chaptercontent';
 import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
 import { Subscription } from 'rxjs';
@@ -30,17 +30,16 @@ export class ChapterComponent {
 
   constructor(
     private apicallservice: ApicallService,
-    private route: ActivatedRoute, 
-    private router: Router
-  ) 
-  {}
-
-  ngOnInit(): void {
-      this.obterCapitulo();
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
+    this.obterCapitulo();
     if (typeof window === 'object' || typeof window !== 'undefined') {
       this.style = JSON.parse(localStorage.getItem('chapter-style') ?? '{}');
     }
   }
+
+  ngOnInit(): void {}
 
   obterCapitulo() {
     this.urlName = this.route.snapshot.paramMap.get('urlName');

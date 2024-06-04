@@ -3,7 +3,11 @@
     <h2>Recent Access</h2>
     <div class="grid-container" [style.grid-template-rows]="10">
       <div *ngFor="let access of recentAccess; let i = index" class="grid-item">
-        <a [href]="'home/' + access.novel_url_name + '/chapters/' + access.cap_nro">
+        <a
+          [href]="
+            'home/' + access.novel_url_name + '/chapters/' + access.cap_nro
+          "
+        >
           <img
             [src]="'assets/images/' + access.novel_url_name + '.jpg'"
             [alt]="access.novel_name"
@@ -11,9 +15,19 @@
         </a>
         <div class="details">
           <p>{{ access.novel_name }}</p>
-          <p>Chapter: <strong style="color: var(--link-color);">{{ access.cap_nro }}</strong></p>
-          <p>{{ access.access_at | date:'dd/MM/yyyy' }}</p>
-          <a [href]="'home/' + access.novel_url_name + '/chapters/' + access.cap_nro"><button>Keep Reading</button></a>
+          <p>
+            Chapter:
+            <strong style="color: var(--link-color)">{{
+              access.cap_nro
+            }}</strong>
+          </p>
+          <p>{{ access.access_at | date: "dd/MM/yyyy" }}</p>
+          <a
+            [href]="
+              'home/' + access.novel_url_name + '/chapters/' + access.cap_nro
+            "
+            ><button>Keep Reading</button></a
+          >
         </div>
       </div>
     </div>

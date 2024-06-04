@@ -1,6 +1,11 @@
-<button (click)="toggleTheme()">Toggle Theme</button>
+<div class="theme-selector">
+  <input type="checkbox" id="theme-toggle" [checked]="isLightTheme" (change)="toggleTheme()">
+  <label for="theme-toggle"></label>
+  <p>{{ isLightTheme ? 'light' : 'dark' }}</p>
+</div>
 
-<label for="color-select">Choose a base color:</label>
-<select id="color-select" (change)="onColorChange($event)">
-  <option *ngFor="let color of availableColors" [value]="color" [selected]="color === currentBaseColorClass">{{color}}</option>
+<select id="theme-color" (change)="onColorChange($event)">
+  <option *ngFor="let color of availableColors" [value]="color" [selected]="color === currentBaseColorClass">
+    {{ color }}
+  </option>
 </select>

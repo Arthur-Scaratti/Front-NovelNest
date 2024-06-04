@@ -25,8 +25,15 @@ export class TopTenByTagSlideComponent implements AfterViewInit {
   novels: Novelnameurl[] = [];
 
   tooltipVisible: boolean = false;
-  tooltipData: { name: string, description: string, autor: string, tags: string[], status: string, nro_capitulos_en: number | string} | null = null;
-  tooltipPosition: { top: string, left: string } = { top: '0px', left: '0px' };
+  tooltipData: {
+    name: string;
+    description: string;
+    autor: string;
+    tags: string[];
+    status: string;
+    nro_capitulos_en: number | string;
+  } | null = null;
+  tooltipPosition: { top: string; left: string } = { top: '0px', left: '0px' };
   hoverTimeout: any;
 
   @ViewChild('carouselImages') carouselImages!: ElementRef;
@@ -42,7 +49,10 @@ export class TopTenByTagSlideComponent implements AfterViewInit {
     this.checkDeviceWidth();
 
     if (typeof window !== 'undefined') {
-      window.addEventListener('resize', this.adjustCarouselCentering.bind(this));
+      window.addEventListener(
+        'resize',
+        this.adjustCarouselCentering.bind(this),
+      );
       window.addEventListener('resize', this.checkDeviceWidth.bind(this));
     }
     if (this.carouselImages) {
@@ -51,10 +61,9 @@ export class TopTenByTagSlideComponent implements AfterViewInit {
         (event: WheelEvent) => {
           event.preventDefault();
           this.carouselImages.nativeElement.scrollLeft += event.deltaY;
-        }
+        },
       );
     }
-
   }
 
   adjustCarouselCentering() {
@@ -106,7 +115,7 @@ export class TopTenByTagSlideComponent implements AfterViewInit {
 
   filterNovelsByTag(): void {
     const selectedTopByTag = this.topByTags.find(
-      (topByTag) => topByTag.tag === this.selectedTag
+      (topByTag) => topByTag.tag === this.selectedTag,
     );
     this.novels = selectedTopByTag ? selectedTopByTag.novels : [];
   }

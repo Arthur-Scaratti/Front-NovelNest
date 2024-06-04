@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { ApicallService } from '../../services/apicall.service';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +20,12 @@ import { ActivatedRoute, Router} from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
   message = '';
-  messageFromRegister: string | null ='';
+  messageFromRegister: string | null = '';
   constructor(
     private apicallservice: ApicallService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl<string | null>('', { nonNullable: true }),
@@ -29,7 +34,7 @@ export class LoginComponent {
   }
   ngOnInit(): void {
     // Receber a mensagem dos query params
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.messageFromRegister = params['message'] || '';
     });
   }
@@ -42,7 +47,7 @@ export class LoginComponent {
           const token = response.token;
           console.log(token);
           if (typeof window !== 'undefined' && 'sessionStorage') {
-          sessionStorage.setItem('authToken', token);
+            sessionStorage.setItem('authToken', token);
           }
           this.message = 'Login successful!';
           window.location.href = '/home';
@@ -50,7 +55,7 @@ export class LoginComponent {
         (error) => {
           this.message = 'Login failed. Please try again.';
           console.error('Login error', error);
-        }
+        },
       );
     } else {
       this.message = 'Please fill in all required fields.';

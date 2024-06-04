@@ -13,7 +13,7 @@ import { ReaderOptionsComponent } from './reader-options/reader-options.componen
     ChapterComponent,
     SideNavComponent,
     ReaderOptionsComponent,
-    NgFor
+    NgFor,
   ],
   providers: [],
   templateUrl: './toolbar.component.html',

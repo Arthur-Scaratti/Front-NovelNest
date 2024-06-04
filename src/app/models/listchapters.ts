@@ -12,7 +12,7 @@ export interface ListChaptersResponse {
   status?: string;
   nro_capitulos_en?: number;
   chapters: ListChapters[];
-  
+
   tags: TagsNovel[];
 }
 

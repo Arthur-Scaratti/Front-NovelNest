@@ -7,10 +7,11 @@
 
   <div class="carousel-images" #carouselImages>
     <a *ngFor="let novel of novels" [href]="['/home/' + novel.url_name]">
-      <img [src]="'assets/images/' + novel.url_name + '.jpg'" 
-      (mouseenter)="showTooltip(novel, $event)"
-      (mouseleave)="hideTooltip()"
-       />
+      <img
+        [src]="'assets/images/' + novel.url_name + '.jpg'"
+        (mouseenter)="showTooltip(novel, $event)"
+        (mouseleave)="hideTooltip()"
+      />
       <p>{{ novel.name }}</p>
     </a>
   </div>
@@ -26,5 +27,3 @@
   [nro_capitulos_en]="tooltipData.nro_capitulos_en"
   [ngStyle]="{ top: tooltipPosition.top, left: tooltipPosition.left }"
 ></app-tooltip>
-
-

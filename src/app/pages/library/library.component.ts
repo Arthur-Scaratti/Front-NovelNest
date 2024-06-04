@@ -8,7 +8,7 @@ import { ApicallService } from '../../services/apicall.service';
   imports: [NgFor, NgIf, CommonModule],
   providers: [ApicallService],
   templateUrl: './library.component.html',
-  styleUrl: './library.component.scss'
+  styleUrl: './library.component.scss',
 })
 export class LibraryComponent {
   recentAccess: any[] = [];
@@ -22,7 +22,7 @@ export class LibraryComponent {
       },
       (error) => {
         console.error('Erro ao buscar acessos recentes:', error);
-      }
+      },
     );
   }
 }

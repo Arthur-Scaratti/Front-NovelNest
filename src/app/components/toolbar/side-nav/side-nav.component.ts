@@ -31,7 +31,9 @@ export class SideNavComponent {
     this.urlName = this.route.snapshot.paramMap.get('urlName');
     this.apicallservice.getChapters(this.urlName).subscribe((chapters) => {
       if (chapters && chapters.chapters) {
-        this.chapters = chapters.chapters.filter(chapter => chapter.language === 'EN');
+        this.chapters = chapters.chapters.filter(
+          (chapter) => chapter.language === 'EN',
+        );
         this.novelName = chapters.novelName;
       }
     });

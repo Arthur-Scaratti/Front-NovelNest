@@ -1,0 +1,53 @@
+.theme-selector {
+    display: flex;
+    position: relative;
+    width: 60px; /* Ajuste conforme necessário */
+    height: 34px; /* Ajuste conforme necessário */
+  }
+  
+  .theme-selector input[type="checkbox"] {
+    display: none;
+  }
+  
+  .theme-selector label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    background-color: #ccc; /* Cor de fundo do slider */
+    transition: background-color 0.3s ease;
+    border-radius: 34px; /* Deve ser metade da altura */
+  }
+  p{
+    margin-left: 72px;
+    margin-top: 6px;
+  }
+  .theme-selector label:before {
+    position: absolute;
+    content: '';
+    height: 28px; /* Altura do círculo */
+    width: 28px; /* Largura do círculo */
+    left: 3px; /* Espaçamento esquerdo */
+    bottom: 3px; /* Espaçamento inferior */
+    background-color: white;
+    transition: transform 0.3s ease;
+    border-radius: 50%; /* Formato de círculo */
+  }
+  
+  .theme-selector input[type="checkbox"]:checked + label {
+    background-color: var(--gradient-color-1); /* Cor de fundo quando ativo */
+  }
+  
+  .theme-selector input[type="checkbox"]:checked + label:before {
+    transform: translateX(26px); /* Movimenta o círculo para a direita */
+  }
+  
+  #theme-color {
+    background-color: var(--suport-color);
+    width: 120px; /* Largura do select */
+    padding: 8px; /* Espaçamento interno */
+    font-size: 14px; /* Tamanho da fonte */
+  }
+  

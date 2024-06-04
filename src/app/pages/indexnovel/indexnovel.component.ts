@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApicallService } from '../../services/apicall.service';
-import { ListChaptersResponse, GruposDeCapitulos, ListChapters } from '../../models/listchapters';
+import {
+  ListChaptersResponse,
+  GruposDeCapitulos,
+  ListChapters,
+} from '../../models/listchapters';
 import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BreadcrumbComponent } from '../../components/staples/breadcrumb/breadcrumb.component';
@@ -12,26 +16,31 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-indexnovel',
   standalone: true,
-  imports: [RouterLink, BreadcrumbComponent, FooterComponent, NovelHeaderComponent, NgIf],
+  imports: [
+    RouterLink,
+    BreadcrumbComponent,
+    FooterComponent,
+    NovelHeaderComponent,
+    NgIf,
+  ],
   providers: [ApicallService, HttpClient],
   templateUrl: './indexnovel.component.html',
-  styleUrls: ['./indexnovel.component.scss']
+  styleUrls: ['./indexnovel.component.scss'],
 })
 export class IndexnovelComponent implements OnInit {
-
   urlName: any;
   novelName: any;
-  language = "EN";
+  language = 'EN';
   description: any;
   chapters?: ListChaptersResponse;
   gruposDeCapitulos: GruposDeCapitulos[] = [];
-  grupoAbertoIndex: number = -1; 
+  grupoAbertoIndex: number = -1;
   chaptersByLanguage: { [key: string]: ListChapters[] } = {};
   latestChapters: ListChapters[] = [];
 
   constructor(
-    private apicallservice: ApicallService, 
-    private route: ActivatedRoute
+    private apicallservice: ApicallService,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
