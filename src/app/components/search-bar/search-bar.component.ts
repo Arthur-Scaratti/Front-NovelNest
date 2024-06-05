@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, HostListener, ElementRef, ViewChild, inject } from '@angular/core';
 import { ApicallService } from '../../services/apicall.service';
 import { Novelnameurl } from '../../models/novelnameurl';
 import { NgFor, NgIf } from '@angular/common';
@@ -12,26 +12,20 @@ import { NgFor, NgIf } from '@angular/common';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent {
-  novels: Novelnameurl[] = [];
+  apicallservice = inject(ApicallService);
   filteredNovels: Novelnameurl[] = [];
   searchQuery: string = '';
   isSearchActive: boolean = false;
+  
+  novels: Novelnameurl[] = [];
+  novels$ = this.apicallservice.getNovels().subscribe((novels) => {
+    this.novels = novels;
+  });
 
   @ViewChild('searchContainer') searchContainer!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
 
-  constructor(
-    private apicallservice: ApicallService,
-    private eRef: ElementRef,
-  ) {
-    this.obterListaNovels();
-  }
-
-  obterListaNovels() {
-    this.apicallservice.getNovels().subscribe((novels) => {
-      this.novels = novels;
-    });
-  }
+  constructor() {}
 
   filterNovels() {
     if (this.searchQuery.trim() === '') {

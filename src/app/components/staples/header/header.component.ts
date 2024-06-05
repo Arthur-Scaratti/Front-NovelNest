@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { BreadcrumbComponent } from '../../staples/breadcrumb/breadcrumb.component';
 import { SearchBarComponent } from '../../search-bar/search-bar.component';
 import { Router } from '@angular/router';
@@ -13,7 +13,9 @@ import { ThemeComponent } from '../../theme/theme.component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  router = inject(Router);
+  apicallservice = inject (ApicallService);
   isLoggedIn = false;
   userName: string | null = null;
   showOptions = false;
@@ -23,26 +25,33 @@ export class HeaderComponent {
   currentBaseColorClass = '';
   availableColors: string[] = ['red', 'blue', 'green', 'purple'];
 
-  constructor(
-    private router: Router,
-    private apicallService: ApicallService,
-  ) {
-    if (typeof window === 'object' || typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        this.applyTheme(savedTheme);
-        this.isLightTheme = savedTheme === 'light-mode';
-      }
-
-      const savedBaseColor = localStorage.getItem('base-color');
-      if (savedBaseColor) {
-        this.applyBaseColor(savedBaseColor);
-        this.currentBaseColorClass = savedBaseColor;
-      }
-    }
+  constructor() {
+    this.initializeTheme();
+    this.initializeBaseColor();
+    this.checkAuthToken();
   }
 
   ngOnInit(): void {
+
+  }
+
+  private initializeTheme(): void {
+    const savedTheme = this.getFromLocalStorage('theme');
+    if (savedTheme) {
+      this.applyTheme(savedTheme);
+      this.isLightTheme = savedTheme === 'light-mode';
+    }
+  }
+
+  private initializeBaseColor(): void {
+    const savedBaseColor = this.getFromLocalStorage('base-color');
+    if (savedBaseColor) {
+      this.applyBaseColor(savedBaseColor);
+      this.currentBaseColorClass = savedBaseColor;
+    }
+  }
+
+  private checkAuthToken(): void {
     if (typeof window !== 'undefined' && window.sessionStorage) {
       const token = sessionStorage.getItem('authToken');
       if (token) {
@@ -51,19 +60,22 @@ export class HeaderComponent {
     }
   }
 
-
-
-  verifyToken(): void {
-    this.apicallService.validateToken().subscribe(
-      (response) => {
-        this.userName = response.username;
-      },
-      (error) => {
-        console.error('Token validation error', error);
-      },
-    );
+  private getFromLocalStorage(key: string): string | null {
+    return typeof window !== 'undefined' ? localStorage.getItem(key) : null;
   }
 
+  private verifyToken(): void {
+    this.apicallservice.validateToken().subscribe({
+      next: (response) => {
+        this.userName = response.username;
+        this.isLoggedIn = true;
+      },
+      error: (error) => {
+        console.error('Token validation error', error);
+      },
+    });
+  }
+  
   logout(): void {
     sessionStorage.removeItem('authToken');
     this.isLoggedIn = false;
@@ -96,15 +108,17 @@ export class HeaderComponent {
   }
 
   applyTheme(theme: string): void {
+    const rootElement = document.documentElement;
     if (theme === 'light-mode') {
-      document.documentElement.classList.add('light-mode');
+      rootElement.classList.add('light-mode');
     } else {
-      document.documentElement.classList.remove('light-mode');
+      rootElement.classList.remove('light-mode');
     }
   }
 
   applyBaseColor(color: string): void {
-    document.documentElement.classList.remove(...this.availableColors);
-    document.documentElement.classList.add(color);
+    const rootElement = document.documentElement;
+    rootElement.classList.remove(...this.availableColors);
+    rootElement.classList.add(color);
   }
 }

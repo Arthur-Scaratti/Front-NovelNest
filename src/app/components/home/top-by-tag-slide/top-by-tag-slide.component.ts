@@ -5,6 +5,8 @@ import {
   Input,
   ViewChild,
   AfterViewInit,
+  OnDestroy,
+  inject,
 } from '@angular/core';
 import { Novelnameurl } from '../../../models/novelnameurl';
 import { NgFor, NgIf, NgStyle } from '@angular/common';
@@ -18,11 +20,11 @@ import { RouterLink } from '@angular/router';
   templateUrl: './top-by-tag-slide.component.html',
   styleUrls: ['./top-by-tag-slide.component.scss'],
 })
-export class TopByTagSlideComponent implements AfterViewInit {
+export class TopByTagSlideComponent implements AfterViewInit, OnDestroy {
   @Input() novels: Novelnameurl[] = [];
   @ViewChild('carouselImages') carouselImages!: ElementRef;
+  cdr = inject (ChangeDetectorRef);
   left = 0;
-  novelName: any;
 
   tooltipVisible: boolean = false;
   tooltipData: {
@@ -37,26 +39,43 @@ export class TopByTagSlideComponent implements AfterViewInit {
   hoverTimeout: any;
 
   isDesktop: boolean = true;
+  readonly TOOLTIP_WIDTH: number = 500;
+  readonly TOOLTIP_DELAY: number = 300;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor() {}
 
   ngAfterViewInit() {
     this.adjustCarouselCentering();
     this.checkDeviceWidth();
+    this.addEventListeners();
+  }
+
+  ngOnDestroy() {
+    this.removeEventListeners();
+  }
+
+  addEventListeners() {
     if (typeof window !== 'undefined') {
-      window.addEventListener(
-        'resize',
-        this.adjustCarouselCentering.bind(this),
-      );
+      window.addEventListener('resize', this.adjustCarouselCentering.bind(this));
       window.addEventListener('resize', this.checkDeviceWidth.bind(this));
     }
     this.carouselImages.nativeElement.addEventListener(
       'wheel',
-      (event: WheelEvent) => {
-        event.preventDefault();
-        this.carouselImages.nativeElement.scrollLeft += event.deltaY;
-      },
+      this.onWheelScroll.bind(this)
     );
+  }
+
+  removeEventListeners() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.adjustCarouselCentering.bind(this));
+      window.removeEventListener('resize', this.checkDeviceWidth.bind(this));
+    }
+    this.carouselImages.nativeElement.removeEventListener('wheel', this.onWheelScroll.bind(this));
+  }
+
+  onWheelScroll(event: WheelEvent) {
+    event.preventDefault();
+    this.carouselImages.nativeElement.scrollLeft += event.deltaY;
   }
 
   adjustCarouselCentering() {
@@ -96,24 +115,9 @@ export class TopByTagSlideComponent implements AfterViewInit {
         status: novel.status || 'Unknown',
         nro_capitulos_en: novel.nro_capitulos_en || 'Unknown',
       };
-
-      const windowWidth = window.innerWidth;
-      const tooltipWidth = 500; // approximate width of the tooltip
-      const mouseX = event.clientX;
-      const spaceLeft = mouseX; // available space to the left
-      const spaceRight = windowWidth - mouseX; // available space to the right
-
-      if (spaceRight >= tooltipWidth) {
-        this.tooltipPosition.left = `${mouseX + 10}px`; // position to the right of the cursor
-      } else if (spaceLeft >= tooltipWidth) {
-        this.tooltipPosition.left = `${mouseX - tooltipWidth - 30}px`; // position to the left of the cursor
-      } else {
-        this.tooltipPosition.left = '10px'; // fallback: default position
-      }
-
-      this.tooltipPosition.top = `${event.clientY + 10}px`; // position below the cursor
-      this.tooltipVisible = true; // show the tooltip
-    }, 300); // 300 milliseconds delay before showing the tooltip
+      this.setTooltipPosition(event);
+      this.tooltipVisible = true;
+    }, this.TOOLTIP_DELAY);
   }
 
   hideTooltip() {
@@ -122,7 +126,24 @@ export class TopByTagSlideComponent implements AfterViewInit {
     this.tooltipData = null;
   }
 
+  setTooltipPosition(event: MouseEvent) {
+    const windowWidth = window.innerWidth;
+    const mouseX = event.clientX;
+    const spaceLeft = mouseX;
+    const spaceRight = windowWidth - mouseX;
+
+    if (spaceRight >= this.TOOLTIP_WIDTH) {
+      this.tooltipPosition.left = `${mouseX + 10}px`;
+    } else if (spaceLeft >= this.TOOLTIP_WIDTH) {
+      this.tooltipPosition.left = `${mouseX - this.TOOLTIP_WIDTH - 30}px`;
+    } else {
+      this.tooltipPosition.left = '10px';
+    }
+
+    this.tooltipPosition.top = `${event.clientY + 10}px`;
+  }
+
   checkDeviceWidth() {
-    this.isDesktop = typeof window !== 'undefined' && window.innerWidth >= 950; // Example breakpoint for desktop
+    this.isDesktop = typeof window !== 'undefined' && window.innerWidth >= 950;
   }
 }

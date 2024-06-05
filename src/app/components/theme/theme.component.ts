@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({
@@ -8,7 +8,7 @@ import { NgFor, NgIf } from '@angular/common';
   templateUrl: './theme.component.html',
   styleUrls: ['./theme.component.scss'],
 })
-export class ThemeComponent {
+export class ThemeComponent implements OnInit {
   @Input() isLightTheme = false;
   @Input() currentBaseColorClass = '';
   availableColors: string[] = ['red', 'blue', 'green', 'purple'];
@@ -17,14 +17,11 @@ export class ThemeComponent {
   constructor() {}
 
   ngOnInit(): void {
-    if (typeof window === 'object' || typeof window !== 'undefined'){
     this.loadThemeFromLocalStorage();
-    window.addEventListener('storage', (event) => {
-      if (event.key === 'theme') {
-        this.loadThemeFromLocalStorage();
-      }
-    });
-  }}
+    if (typeof window !== 'undefined') {
+      window.addEventListener('storage', this.syncThemeWithLocalStorage.bind(this));
+    }
+  }
 
   loadThemeFromLocalStorage(): void {
     const savedTheme = localStorage.getItem('theme');
@@ -38,6 +35,12 @@ export class ThemeComponent {
     }
   }
 
+  syncThemeWithLocalStorage(event: StorageEvent): void {
+    if (event.key === 'theme' || event.key === 'base-color') {
+      this.loadThemeFromLocalStorage();
+    }
+  }
+
   toggleTheme(): void {
     this.isLightTheme = !this.isLightTheme;
     this.toggleChecked = !this.toggleChecked;
@@ -46,22 +49,25 @@ export class ThemeComponent {
     localStorage.setItem('theme', theme);
   }
 
-  onColorChange(event: any): void {
-    const selectedColor = event.target.value;
+  onColorChange(event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    const selectedColor = target.value;
     this.applyBaseColor(selectedColor);
     localStorage.setItem('base-color', selectedColor);
   }
 
   applyTheme(theme: string): void {
+    const classList = document.documentElement.classList;
     if (theme === 'light-mode') {
-      document.documentElement.classList.add('light-mode');
+      classList.add('light-mode');
     } else {
-      document.documentElement.classList.remove('light-mode');
+      classList.remove('light-mode');
     }
   }
 
   applyBaseColor(color: string): void {
-    document.documentElement.classList.remove(...this.availableColors);
-    document.documentElement.classList.add(color);
+    const classList = document.documentElement.classList;
+    classList.remove(...this.availableColors);
+    classList.add(color);
   }
 }

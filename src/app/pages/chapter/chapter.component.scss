@@ -83,9 +83,11 @@ h1 {
   margin-right: auto;
 }
 p {
-  font-family: var(--font-text);
+  font-family: var(--font-chapter);
+  line-height: 1.5;
   margin: 15px;
   letter-spacing: 1px;
+  font-size: var(--font-chapter-size)
 }
 @media screen and (max-width: 1050px) {
   h1 {

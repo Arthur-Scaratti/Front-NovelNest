@@ -2,7 +2,7 @@
   <div class="options">
     <div class="font-options">
       <span>Font: </span>
-      <select [(ngModel)]="font" (change)="applyStyle()">
+      <select [(ngModel)]="font" (change)="applyStyle()" id="font-family">
         <option value="var(--font-rubik)">Rubik</option>
         <option value="var(--font-lato)">Lato</option>
         <option value="var(--font-crimson)">Crimson Text</option>
@@ -54,7 +54,7 @@
 
     <div class="color-options">
       <span>Font Color: </span>
-      <select [(ngModel)]="color" (change)="applyStyle()">
+      <select [(ngModel)]="color" (change)="applyStyle()" id="font-color">
         <option value="gray">Cinza</option>
         <option value="white">Branca</option>
         <option value="black">Preta</option>

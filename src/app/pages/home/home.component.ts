@@ -23,7 +23,9 @@ import { TopByTag } from '../../models/novelnameurl';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
+
 export class HomeComponent {
+
   apicallservice = inject(ApicallService);
   novels: Novelnameurl[] = [];
   recentUploaded: Novelnameurl[] = [];
@@ -43,4 +45,5 @@ export class HomeComponent {
   .subscribe((data) => (this.topTenByTag = data));
   
   constructor() {}
+
 }

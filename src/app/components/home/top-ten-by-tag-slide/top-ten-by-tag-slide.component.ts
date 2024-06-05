@@ -5,6 +5,8 @@ import {
   Input,
   ViewChild,
   AfterViewInit,
+  OnDestroy,
+  inject,
 } from '@angular/core';
 import { Novelnameurl, TopByTag } from '../../../models/novelnameurl';
 import { NgFor, NgIf, NgStyle } from '@angular/common';
@@ -18,8 +20,9 @@ import { RouterLink } from '@angular/router';
   templateUrl: './top-ten-by-tag-slide.component.html',
   styleUrls: ['./top-ten-by-tag-slide.component.scss'],
 })
-export class TopTenByTagSlideComponent implements AfterViewInit {
+export class TopTenByTagSlideComponent implements AfterViewInit, OnDestroy {
   @Input() topByTags: TopByTag[] = [];
+  cdr = inject (ChangeDetectorRef);
   tags: string[] = [];
   selectedTag: string = 'Action';
   novels: Novelnameurl[] = [];
@@ -40,30 +43,48 @@ export class TopTenByTagSlideComponent implements AfterViewInit {
   left = 0;
 
   isDesktop: boolean = true;
+  readonly TOOLTIP_WIDTH: number = 500;
+  readonly TOOLTIP_DELAY: number = 300;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor() {}
 
   ngAfterViewInit() {
+    this.initializeComponent();
     this.extractTags();
     this.filterNovelsByTag();
-    this.checkDeviceWidth();
+  }
 
+  ngOnDestroy() {
+    this.removeEventListeners();
+  }
+
+  initializeComponent() {
+    
+    this.checkDeviceWidth();
+    this.addEventListeners();
+    this.addWheelEventListener();
+  }
+  addEventListeners() {
     if (typeof window !== 'undefined') {
-      window.addEventListener(
-        'resize',
-        this.adjustCarouselCentering.bind(this),
-      );
+      window.addEventListener('resize', this.adjustCarouselCentering.bind(this));
       window.addEventListener('resize', this.checkDeviceWidth.bind(this));
     }
-    if (this.carouselImages) {
-      this.carouselImages.nativeElement.addEventListener(
-        'wheel',
-        (event: WheelEvent) => {
-          event.preventDefault();
-          this.carouselImages.nativeElement.scrollLeft += event.deltaY;
-        },
-      );
+  }
+  removeEventListeners() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.adjustCarouselCentering.bind(this));
+      window.removeEventListener('resize', this.checkDeviceWidth.bind(this));
     }
+  }
+  addWheelEventListener() {
+    if (this.carouselImages) {
+      this.carouselImages.nativeElement.addEventListener('wheel', this.onWheelScroll.bind(this));
+    }
+  }
+
+  onWheelScroll(event: WheelEvent) {
+    event.preventDefault();
+    this.carouselImages.nativeElement.scrollLeft += event.deltaY;
   }
 
   adjustCarouselCentering() {
@@ -93,9 +114,9 @@ export class TopTenByTagSlideComponent implements AfterViewInit {
     }
   }
 
-  extractTags(): void {
+  extractTags() {
     const tagsSet = new Set<string>();
-    this.topByTags.forEach((topByTag) => {
+    this.topByTags.forEach(topByTag => {
       if (topByTag.tag) {
         tagsSet.add(topByTag.tag);
       }
@@ -103,20 +124,17 @@ export class TopTenByTagSlideComponent implements AfterViewInit {
     this.tags = Array.from(tagsSet);
   }
 
-  onTagChange(event: Event): void {
+  onTagChange(event: Event) {
     const target = event.target as HTMLSelectElement;
-    const tag = target.value;
-    this.selectedTag = tag;
+    this.selectedTag = target.value;
     this.filterNovelsByTag();
     setTimeout(() => {
       this.adjustCarouselCentering();
     }, 0);
   }
 
-  filterNovelsByTag(): void {
-    const selectedTopByTag = this.topByTags.find(
-      (topByTag) => topByTag.tag === this.selectedTag,
-    );
+  filterNovelsByTag() {
+    const selectedTopByTag = this.topByTags.find(topByTag => topByTag.tag === this.selectedTag);
     this.novels = selectedTopByTag ? selectedTopByTag.novels : [];
   }
 
@@ -124,32 +142,38 @@ export class TopTenByTagSlideComponent implements AfterViewInit {
     if (!this.isDesktop) return;
 
     this.hoverTimeout = setTimeout(() => {
-      this.tooltipData = {
-        name: novel.name || 'No name available',
-        description: novel.description || 'No description available',
-        autor: novel.autor || 'Unknown',
-        tags: novel.tags || [],
-        status: novel.status || 'Unknown',
-        nro_capitulos_en: novel.nro_capitulos_en || 'Unknown',
-      };
+      this.setTooltipData(novel);
+      this.setTooltipPosition(event);
+      this.tooltipVisible = true;
+    }, this.TOOLTIP_DELAY);
+  }
 
-      const windowWidth = window.innerWidth;
-      const tooltipWidth = 500; // approximate width of the tooltip
-      const mouseX = event.clientX;
-      const spaceLeft = mouseX; // available space to the left
-      const spaceRight = windowWidth - mouseX; // available space to the right
+  setTooltipData(novel: Novelnameurl) {
+    this.tooltipData = {
+      name: novel.name || 'No name available',
+      description: novel.description || 'No description available',
+      autor: novel.autor || 'Unknown',
+      tags: novel.tags || [],
+      status: novel.status || 'Unknown',
+      nro_capitulos_en: novel.nro_capitulos_en || 'Unknown',
+    };
+  }
 
-      if (spaceRight >= tooltipWidth) {
-        this.tooltipPosition.left = `${mouseX + 10}px`; // position to the right of the cursor
-      } else if (spaceLeft >= tooltipWidth) {
-        this.tooltipPosition.left = `${mouseX - tooltipWidth - 30}px`; // position to the left of the cursor
-      } else {
-        this.tooltipPosition.left = '10px'; // fallback: default position
-      }
+  setTooltipPosition(event: MouseEvent) {
+    const windowWidth = window.innerWidth;
+    const mouseX = event.clientX;
+    const spaceLeft = mouseX;
+    const spaceRight = windowWidth - mouseX;
 
-      this.tooltipPosition.top = `${event.clientY + 10}px`; // position below the cursor
-      this.tooltipVisible = true; // show the tooltip
-    }, 300); // 300 milliseconds delay before showing the tooltip
+    if (spaceRight >= this.TOOLTIP_WIDTH) {
+      this.tooltipPosition.left = `${mouseX + 10}px`;
+    } else if (spaceLeft >= this.TOOLTIP_WIDTH) {
+      this.tooltipPosition.left = `${mouseX - this.TOOLTIP_WIDTH - 30}px`;
+    } else {
+      this.tooltipPosition.left = '10px';
+    }
+
+    this.tooltipPosition.top = `${event.clientY + 10}px`;
   }
 
   hideTooltip() {
@@ -159,6 +183,6 @@ export class TopTenByTagSlideComponent implements AfterViewInit {
   }
 
   checkDeviceWidth() {
-    this.isDesktop = typeof window !== 'undefined' && window.innerWidth >= 950; // Example breakpoint for desktop
+    this.isDesktop = typeof window !== 'undefined' && window.innerWidth >= 950;
   }
 }

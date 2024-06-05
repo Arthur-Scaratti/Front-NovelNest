@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Novelnameurl, TopByTag } from '../models/novelnameurl';
 import { TagsNovel } from '../models/listchapters';
 import { ListChaptersResponse } from '../models/listchapters';
@@ -10,12 +10,11 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class ApicallService {
+  http = inject (HttpClient);
   private apiUrlRequest: string = '';
   private url = environment.apiUrl;
 
-  constructor(
-    private http: HttpClient,
-  ) {}
+  constructor(){}
   //////////////////////////////////////////////////////////////////////
 
   getTags() {
@@ -60,8 +59,6 @@ export class ApicallService {
     language: string,
   ): Observable<any> {
     let token = sessionStorage.getItem('authToken');
-
-    console.log(token);
     let headers = new HttpHeaders();
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);

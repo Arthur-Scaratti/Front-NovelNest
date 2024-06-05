@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -10,13 +10,14 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./breadcrumb.component.scss'],
 })
 export class BreadcrumbComponent {
+  router = inject(Router)
   currentUrl: string = '';
   novelName: string = '';
   capNro: string = '';
   partesmin: string[] = [];
   partes: string[] = [];
 
-  constructor(private router: Router) {
+  constructor() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentUrl = event.url.split('?')[0]; // Ignorar parâmetros na URL

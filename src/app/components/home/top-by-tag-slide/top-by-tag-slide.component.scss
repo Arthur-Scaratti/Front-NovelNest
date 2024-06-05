@@ -90,7 +90,7 @@ h2 {
   overflow: hidden; /* Adicionado para esconder o texto que excede o limite */
   text-overflow: ellipsis; /* Adicionado para adicionar '...' no final do texto cortado */
   white-space: nowrap; /* Adicionado para evitar quebras de linha */
-  width: 120px; /* Adicionado para definir a largura máxima do texto */
+  width: 100%; /* Adicionado para definir a largura máxima do texto */
 }
 .carousel-images a:last-child {
   margin-right: 0;

@@ -2,7 +2,7 @@ import { RouterLink, ActivatedRoute } from '@angular/router';
 import { ApicallService } from '../../services/apicall.service';
 import { ListChapters, TagsNovel } from '../../models/listchapters';
 import { NgClass, NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-novel-header',
@@ -13,8 +13,10 @@ import { Component } from '@angular/core';
   styleUrl: './novel-header.component.scss',
 })
 export class NovelHeaderComponent {
+  apicallservice = inject(ApicallService);
+  route = inject(ActivatedRoute);
   expanded: boolean = false;
-  urlName: string | null = null;
+  urlName = this.route.snapshot.paramMap.get('urlName') ?? '';
   novelName: string | null = null;
   description: string | null = null;
   status: string | any;
@@ -22,30 +24,18 @@ export class NovelHeaderComponent {
   autor: string | null = null;
   tags: TagsNovel[] | null = null;
   chapters: ListChapters[] | null = null;
-
-  constructor(
-    private apicallservice: ApicallService,
-    private route: ActivatedRoute,
-  ) {
-    this.obterCapitulos();
-  }
-
-  obterCapitulos() {
-    this.urlName = this.route.snapshot.paramMap.get('urlName');
-    if (this.urlName) {
-      this.apicallservice.getChapters(this.urlName).subscribe((chapters) => {
-        if (chapters && chapters.chapters) {
-          this.chapters = chapters.chapters;
-          this.novelName = chapters.novelName;
-          this.description = chapters.description;
-          this.status = chapters.status;
-          this.nro_capitulos_en = chapters.nro_capitulos_en;
-          this.autor = chapters.autor;
-          this.tags = chapters.tags;
-        }
-      });
+  chapters$ = this.apicallservice.getChapters(this.urlName).subscribe((chapters) => {
+    if (chapters && chapters.chapters) {
+      this.chapters = chapters.chapters;
+      this.novelName = chapters.novelName;
+      this.description = chapters.description;
+      this.status = chapters.status;
+      this.nro_capitulos_en = chapters.nro_capitulos_en;
+      this.autor = chapters.autor;
+      this.tags = chapters.tags;
     }
-  }
+  });
+  constructor() {}
 
   toggleExpand() {
     this.expanded = !this.expanded;
