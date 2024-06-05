@@ -14,6 +14,7 @@ import { NgClass } from '@angular/common';
   templateUrl: './side-nav.component.html',
   styleUrl: './side-nav.component.scss',
 })
+
 export class SideNavComponent {
   apicallservice = inject(ApicallService);
   route = inject(ActivatedRoute);

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BreadcrumbComponent } from '../../staples/breadcrumb/breadcrumb.component';
 import { SearchBarComponent } from '../../search-bar/search-bar.component';
 import { Router } from '@angular/router';
@@ -13,13 +13,13 @@ import { ThemeComponent } from '../../theme/theme.component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   router = inject(Router);
   apicallservice = inject (ApicallService);
   isLoggedIn = false;
   userName: string | null = null;
   showOptions = false;
-  showOptionsLogged = false;
+  showOptionsLogged = false;  
   showTheme = false;
   isLightTheme = false;
   currentBaseColorClass = '';
@@ -29,10 +29,6 @@ export class HeaderComponent implements OnInit {
     this.initializeTheme();
     this.initializeBaseColor();
     this.checkAuthToken();
-  }
-
-  ngOnInit(): void {
-
   }
 
   private initializeTheme(): void {
