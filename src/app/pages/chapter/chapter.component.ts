@@ -26,7 +26,7 @@ export class ChapterComponent {
   styleSubscription: Subscription | undefined;
   styleColor: any;
   style: any = typeof window === 'object' || typeof window !== 'undefined' ? 
-              JSON.parse(localStorage.getItem('chapter-style') ?? '{}') : {};
+  JSON.parse(localStorage.getItem('chapter-style') ?? '{}') : {};
   urlName: string | null = (this.route.snapshot.paramMap.get('urlName'));
   capNro: string = this.route.snapshot.paramMap.get('capNro') ?? '';
   // redundância pra correção de bug onde ele não buscava o nro do capitulo corretamente
