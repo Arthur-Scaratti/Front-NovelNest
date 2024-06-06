@@ -45,7 +45,7 @@
 
 .sidebar,
 .optionsbar {
-  width: 30%;
+  width: 400px;
   max-height: 70%;
   background-color: var(--z-color);
   position: fixed;
@@ -53,11 +53,13 @@
   left: 0;
   transition: transform 0s ease;
   overflow-y: auto;
-  border: 1px solid var(--lines-color);
+  border: 2px solid var(--lines-color);
+  border-bottom: none;
   transform: translateY(200%);
 }
 .optionsbar {
-  border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
   left: 35%;
 }
 .sidebar {
@@ -67,10 +69,19 @@
   }
 }
 .sidebar .index-title {
+  position: relative;
   text-align: center;
+  background-color: var(--background-inv-color);
   padding-top: 10px;
-  padding-bottom: 0px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--lines-color);
   cursor: pointer;
+  h3{
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    color: var( --lines2-color);
+  }
 }
 
 .sidebar.expanded {
@@ -97,12 +108,14 @@
 
 @media screen and (max-width: 767px) {
   .sidebar {
+    max-width: 400px;
     width: 60%;
     left: 0;
     transform: translateY(130%);
   }
 
   .optionsbar {
+    max-width: 400px;
     width: 60%;
     left: 0%;
     transform: translateY(130%);

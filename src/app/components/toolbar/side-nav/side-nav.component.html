@@ -1,11 +1,9 @@
-<div class="index">
-  <ul>
-    @for (chapter of chapters; track $index) {
+<div class="sidebar expanded" #sidebarContainer>
+  <ul class="index">
+    <div *ngFor="let chapter of chapters" #chapterItem [attr.data-capnro]="chapter.cap_nro" class="chapter-item">
       <li>
-        <a [href]="gerarHref(chapter.cap_nro)">
-          <h4>{{ chapter.titulo }}</h4>
-        </a>
+        <a [href]="gerarHref(chapter.cap_nro)"><h4>{{ chapter.titulo }}</h4></a>
       </li>
-    }
+    </div>
   </ul>
 </div>

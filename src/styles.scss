@@ -43,14 +43,18 @@
     var(--gradient-color-1),
     var(--gradient-color-2)
   );
+  --chapter-index-color: black;
+  --background-inv-color: var(--header-color);
 }
 .light-mode {
   --background-color: #cac7c7;
+  --background-inv-color: #b8b6b6;
   --z-color: #c0c0c0;
   --button-color: #d6d6d6;
   --text-light-color: #0e0d0d;
   --text-dark-color: #1d1b1b;
   --back-scroll-bar: #00000000;
+  --chapter-index-color: white;
 }
 :root.red {
   --lines-color: #ad3b3b;

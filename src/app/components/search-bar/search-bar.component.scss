@@ -6,7 +6,7 @@
 
 .search-container {
   width: 100%;
-  max-width: 250px; /* Limita a largura máxima do contêiner */
+  max-width: 200px; /* Limita a largura máxima do contêiner */
   position: relative;
   height: 100%; /* Adiciona posicionamento relativo ao contêiner */
 }
@@ -68,19 +68,19 @@
   z-index: 1000; /* Garante que fique acima de outros elementos */
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 620px) {
   .search-container {
     width: 100%;
-    max-width: 200px; /* Limita a largura máxima do contêiner */
+    max-width: 150px; /* Limita a largura máxima do contêiner */
     position: relative;
     height: 100%; /* Adiciona posicionamento relativo ao contêiner */
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 560px) {
   .search-container {
-    width: 100%;
-    max-width: 125px; /* Limita a largura máxima do contêiner */
+    width: 80px;
+    max-width: 80px; /* Limita a largura máxima do contêiner */
     position: relative;
     height: 100%; /* Adiciona posicionamento relativo ao contêiner */
   }
