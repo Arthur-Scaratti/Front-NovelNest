@@ -5,7 +5,9 @@
   justify-content: center;
   background-color: var(--background-color);
   text-align: center;
-  border-bottom: 1px solid var(--lines2-color);
+  border-bottom: 2px solid;
+  border-image: var(--border-gradient);
+  border-image-slice: 1;
   padding: 8px 5%;
 }
 
@@ -39,6 +41,8 @@
     list-style: none;
     border: 1px solid var(--lines-color);
     border-radius: 4px;
+    margin-left: 4px;
+    margin-top: 4px;
     gap: 8px;
 
     a {
@@ -66,13 +70,17 @@
 h1 {
   padding-top: 30px;
   padding-bottom: 30px;
-  border-bottom: 1px solid var(--lines2-color);
+  border-bottom: 2px solid;
+  border-image: var(--border-gradient);
+  border-image-slice: 1;
   font-family: var(--font-title);
 }
 
 h2 {
-  border-top: 1px solid var(--lines-color);
-  border-bottom: 1px solid var(--lines-color);
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-image: var(--border-gradient);
+  border-image-slice: 1;
   width: 100%;
   text-align: left;
   padding: 5px;

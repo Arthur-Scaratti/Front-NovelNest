@@ -11,7 +11,8 @@ import { NgFor, NgIf } from '@angular/common';
 export class ThemeComponent implements OnInit {
   @Input() isLightTheme = false;
   @Input() currentBaseColorClass = '';
-  availableColors: string[] = ['red', 'blue', 'green', 'purple'];
+  availableColors: string[] = ['Red','Akemi', 'Blue', 'Green', 'Pink', 'Purple', 'Yellow', 'Orange', 
+  'Teal', 'Gray', 'Orange-teal', 'Purple-green', 'Blue-yellow', 'Orange-blue'];
   toggleChecked = false;
 
   constructor() {}
