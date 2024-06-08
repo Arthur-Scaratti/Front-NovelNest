@@ -35,14 +35,14 @@ export class NovelsGridComponent implements OnInit {
   hoverTimeout: any;
   isDesktop: boolean = true;
 
-  constructor() {}
+  constructor() {this.filteredNovels = this.novels;}
 
   ngOnInit() {
     this.filteredNovels = this.novels;
+    this.filterNovelsByParam(this.tagParam);
     this.calculateRows();
     this.fetchTags();
     this.checkDeviceWidth();
-    this.filterNovelsByParam(this.tagParam);
   }
 
   @HostListener('window:resize')

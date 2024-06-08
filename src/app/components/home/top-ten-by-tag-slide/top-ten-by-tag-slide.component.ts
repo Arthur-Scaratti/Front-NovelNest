@@ -7,6 +7,7 @@ import {
   AfterViewInit,
   OnDestroy,
   inject,
+  OnInit,
 } from '@angular/core';
 import { Novelnameurl, TopByTag } from '../../../models/novelnameurl';
 import { NgFor, NgIf, NgStyle } from '@angular/common';
@@ -20,7 +21,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './top-ten-by-tag-slide.component.html',
   styleUrls: ['./top-ten-by-tag-slide.component.scss'],
 })
-export class TopTenByTagSlideComponent implements AfterViewInit, OnDestroy {
+export class TopTenByTagSlideComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() topByTags: TopByTag[] = [];
   cdr = inject (ChangeDetectorRef);
   tags: string[] = [];
@@ -47,6 +48,11 @@ export class TopTenByTagSlideComponent implements AfterViewInit, OnDestroy {
   readonly TOOLTIP_DELAY: number = 300;
 
   constructor() {}
+  ngOnInit(): void {
+    this.initializeComponent();
+    this.extractTags();
+    this.filterNovelsByTag();
+  }
 
   ngAfterViewInit() {
     this.initializeComponent();
