@@ -30,6 +30,11 @@ export class ListnovelComponent {
     }
   });
 
-  constructor() {}
+  constructor() {
+    console.log(this.tag);
+    for (let novel of this.novels){
+      console.log(novel.name)
+    }
+  }
 
 }

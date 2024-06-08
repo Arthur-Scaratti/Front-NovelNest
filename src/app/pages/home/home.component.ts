@@ -5,7 +5,6 @@ import { CarouselComponent } from '../../components/novel-carousel-principal/nov
 import { RecentUploadedComponent } from '../../components/novel-carousel-principal/recent-uploaded/recent-uploaded.component';
 import { RecentUploadedSlideComponent } from '../../components/home/recent-uploaded-slide/recent-uploaded-slide.component';
 import { TopByTagSlideComponent } from '../../components/home/top-by-tag-slide/top-by-tag-slide.component';
-import { TopTenByTagSlideComponent } from '../../components/home/top-ten-by-tag-slide/top-ten-by-tag-slide.component';
 import { TopByTag } from '../../models/novelnameurl';
 
 @Component({
@@ -16,7 +15,6 @@ import { TopByTag } from '../../models/novelnameurl';
     RecentUploadedComponent,
     RecentUploadedSlideComponent,
     TopByTagSlideComponent,
-    TopTenByTagSlideComponent,
   ],
 
   providers: [ApicallService],

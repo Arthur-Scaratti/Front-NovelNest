@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, HostListener, inject } from '@angular/core';
+import { Component, Input, OnInit, HostListener, inject, SimpleChanges } from '@angular/core';
 import { Novelnameurl } from '../../models/novelnameurl';
 import { NgFor, NgIf, NgStyle } from '@angular/common';
 import { ApicallService } from '../../services/apicall.service';
@@ -44,7 +44,11 @@ export class NovelsGridComponent implements OnInit {
     this.fetchTags();
     this.checkDeviceWidth();
   }
-
+  ngOnChanges(changes: SimpleChanges): void {
+    this.filteredNovels = this.novels;
+    
+  }
+  
   @HostListener('window:resize')
   onResize() {
     this.checkDeviceWidth();
