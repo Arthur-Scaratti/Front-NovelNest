@@ -6,8 +6,7 @@
     "start": "ng serve",
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr": "node dist/novelnest_0_2/server/server.mjs --host 0.0.0.0"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -20,11 +19,8 @@
     "@angular/material": "^17.3.0",
     "@angular/platform-browser": "^17.2.0",
     "@angular/platform-browser-dynamic": "^17.2.0",
-    "@angular/platform-server": "^17.2.0",
     "@angular/router": "^17.2.0",
-    "@angular/ssr": "^17.2.3",
     "bootstrap": "^5.3.3",
-    "express": "^4.18.2",
     "json-server": "^1.0.0-alpha.23",
     "lodash": "^4.17.21",
     "ngx-cookie-service": "^2.4.0",
