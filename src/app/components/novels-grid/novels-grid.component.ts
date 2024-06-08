@@ -46,7 +46,7 @@ export class NovelsGridComponent implements OnInit {
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.filteredNovels = this.novels;
-    
+    this.filterNovelsByParam(this.tagParam);
   }
   
   @HostListener('window:resize')
