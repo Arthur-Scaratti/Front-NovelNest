@@ -17,6 +17,7 @@ import { SimpleChange } from '@angular/core';
 })
 export class ChapterComponent {
   apicallservice = inject (ApicallService);
+  router = inject (Router);
   route = inject (ActivatedRoute);
   content: chapterContent | null = null;
   novelName: any;
@@ -64,6 +65,10 @@ export class ChapterComponent {
 
   private getChapterUrl(capNumber: number): string {
     return `/home/${this.urlName}/chapters/${capNumber}`;
+  }
+
+  navigateToChapter(capNumber: number) {
+    this.router.navigate(['/home', this.urlName, 'chapters', capNumber]);
   }
 
   onStyleChanges(style: any) {
