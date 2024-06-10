@@ -6,7 +6,7 @@ import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
 import { Subscription } from 'rxjs';
 import { NgStyle } from '@angular/common';
 import { CommentsComponent } from '../../components/comments/comments.component';
-
+import { SimpleChange } from '@angular/core';
 @Component({
   selector: 'app-chapter',
   standalone: true,
@@ -28,30 +28,37 @@ export class ChapterComponent {
   style: any = typeof window === 'object' || typeof window !== 'undefined' ? 
   JSON.parse(localStorage.getItem('chapter-style') ?? '{}') : {};
   urlName: string | null = (this.route.snapshot.paramMap.get('urlName'));
-  capNro: string = this.route.snapshot.paramMap.get('capNro') ?? '';
-  // redundância pra correção de bug onde ele não buscava o nro do capitulo corretamente
-  capNro$ = this.obterCapitulo.bind(this);
+  capNro: any;
   language: string = 'EN';
+  routeSubscription: Subscription | undefined;
+
+  constructor() { this.obterCapitulo(); }
+  ngOnInit() {
+    this.routeSubscription = this.route.paramMap.subscribe(params => {
+      this.urlName = params.get('urlName');
+      this.obterCapitulo();
+    });
+  }
+
+  ngOnDestroy() {
+    this.routeSubscription?.unsubscribe();
+  }
   
-  content$ = (typeof window !== 'undefined' && this.urlName) ? 
-  this.apicallservice
-    .getChapterContent(this.urlName, this.capNro$(), this.language)
+  obterCapitulo(): void {
+    this.capNro = parseInt(this.route.snapshot.paramMap.get('capNro') ?? '');
+    this.apicallservice
+    .getChapterContent(this.urlName, this.capNro, this.language)
     .subscribe((content) => {
       if (content && content.chapterLines) {
         this.content = content;
         this.novelName = this.content?.novelName;
         this.title = this.content?.chapterTitle;
 
-        this.previousUrl = this.getChapterUrl(this.capNro$() - 1);
-        this.nextUrl = this.getChapterUrl(this.capNro$() + 1);
+        this.previousUrl = this.getChapterUrl(this.capNro - 1);
+        this.nextUrl = this.getChapterUrl(this.capNro + 1);
       }
-    }) : null;
+    });
 
-  constructor() { this.obterCapitulo(); }
-
-  obterCapitulo(): number {
-    this.capNro = this.route.snapshot.paramMap.get('capNro') ?? '';
-    return parseInt(this.capNro);
   }
 
   private getChapterUrl(capNumber: number): string {

@@ -7,7 +7,7 @@
     <div class="latest-content">
       @for (capitulo of latestChapters; track $index) {
         <li>
-          <a [href]="gerarHref(capitulo.cap_nro)"
+          <a [routerLink]="gerarHref(capitulo.cap_nro)"
             >Chapter: {{ capitulo.cap_nro }}</a
           >
         </li>
@@ -30,7 +30,7 @@
           @if (grupoAbertoIndex === index) {
             @for (capitulo of grupo.rows; track $index) {
               <li>
-                <a [href]="gerarHref(capitulo.cap_nro)">{{
+                <a [routerLink]="gerarHref(capitulo.cap_nro)">{{
                   capitulo.titulo
                 }}</a>
               </li>

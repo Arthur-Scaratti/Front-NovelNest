@@ -6,7 +6,7 @@
   </div>
 
   <div class="carousel-images" #carouselImages>
-    <a *ngFor="let novel of novels" [href]="['/home/' + novel.url_name]">
+    <a *ngFor="let novel of novels" [routerLink]="['/home/' + novel.url_name]">
       <img
         [src]="'assets/images/' + novel.url_name + '.jpg'"
         (mouseenter)="showTooltip(novel, $event)"

@@ -4,7 +4,7 @@ import { ChapterComponent } from '../../pages/chapter/chapter.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { NgClass, NgFor } from '@angular/common';
 import { ReaderOptionsComponent } from './reader-options/reader-options.component';
-
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-toolbar',
   standalone: true,
@@ -14,6 +14,7 @@ import { ReaderOptionsComponent } from './reader-options/reader-options.componen
     SideNavComponent,
     ReaderOptionsComponent,
     NgFor,
+    RouterLink,
   ],
   providers: [],
   templateUrl: './toolbar.component.html',
