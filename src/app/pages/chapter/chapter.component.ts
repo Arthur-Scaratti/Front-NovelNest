@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { ApicallService } from '../../services/apicall.service';
-import { ActivatedRoute, RouterLink, Router } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router, NavigationEnd } from '@angular/router';
 import { chapterContent } from '../../models/chaptercontent';
 import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
-import { Subscription } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import { NgStyle } from '@angular/common';
 import { CommentsComponent } from '../../components/comments/comments.component';
 import { SimpleChange } from '@angular/core';
@@ -32,11 +32,18 @@ export class ChapterComponent {
   capNro: any;
   language: string = 'EN';
   routeSubscription: Subscription | undefined;
+  navigationSubscription: Subscription | undefined;
 
   constructor() { this.obterCapitulo(); }
   ngOnInit() {
     this.routeSubscription = this.route.paramMap.subscribe(params => {
       this.urlName = params.get('urlName');
+      this.obterCapitulo();
+    });
+
+    this.navigationSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
       this.obterCapitulo();
     });
   }
