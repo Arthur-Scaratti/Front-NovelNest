@@ -45,6 +45,7 @@ export class ChapterComponent {
   }
   
   obterCapitulo(): void {
+    this.urlName = this.route.snapshot.paramMap.get('urlName');
     this.capNro = parseInt(this.route.snapshot.paramMap.get('capNro') ?? '');
     this.apicallservice
     .getChapterContent(this.urlName, this.capNro, this.language)
