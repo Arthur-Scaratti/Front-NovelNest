@@ -44,7 +44,7 @@ export class ToolbarComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.urlName = this.route.snapshot.paramMap.get('urlName');
-        this.capNro = this.route.snapshot.paramMap.get('capNro');
+        this.capNro = parseInt(this.route.snapshot.paramMap.get('capNro') ?? '');
         this.previousUrl = this.getChapterUrl(parseInt(this.capNro, 10) - 1);
         this.nextUrl = this.getChapterUrl(parseInt(this.capNro, 10) + 1);
         this.urlNovel = this.getNovelUrl();
@@ -80,6 +80,11 @@ export class ToolbarComponent {
 
   emittStyleChanges(style: any) {
     this.styleChanges.emit(style);
+  }
+  navigateToChapter(capNumber: number) {
+    this.router.navigate(['/refresh']).then(() => {
+      this.router.navigate(['/home', this.urlName, 'chapters', capNumber]);
+    });
   }
 
   @HostListener('document:click', ['$event'])

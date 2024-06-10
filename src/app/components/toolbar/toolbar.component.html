@@ -85,8 +85,8 @@
   </button>
 
   <div class="navigation-links">
-    <a [routerLink]="this.previousUrl">
-      <button class="nextprevious">
+    <a>
+      <button class="nextprevious" (click)="navigateToChapter(capNro - 1)">
         <svg
           fill="var(--suport-color)"
           version="1.1"
@@ -127,8 +127,8 @@
         </svg>
       </button>
     </a>
-    <a [routerLink]="this.nextUrl">
-      <button class="nextprevious">
+    <a>
+      <button class="nextprevious" (click)="navigateToChapter(capNro + 1)">
         <svg
           fill="var(--suport-color)"
           version="1.1"

@@ -7,8 +7,12 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LibraryComponent } from './pages/library/library.component';
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-
+  { 
+    path: '', redirectTo: 'home', pathMatch: 'full' 
+  },
+  {
+    path: 'refresh', redirectTo: '', pathMatch: 'full'
+  },
   {
     path: 'register',
     component: RegisterComponent,

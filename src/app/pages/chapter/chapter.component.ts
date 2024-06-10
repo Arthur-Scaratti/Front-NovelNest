@@ -50,6 +50,7 @@ export class ChapterComponent {
 
   ngOnDestroy() {
     this.routeSubscription?.unsubscribe();
+    this.navigationSubscription?.unsubscribe();
   }
   
   obterCapitulo(): void {
@@ -75,7 +76,10 @@ export class ChapterComponent {
   }
 
   navigateToChapter(capNumber: number) {
-    this.router.navigate(['/home', this.urlName, 'chapters', capNumber]);
+    // Navegar para a rota temporária e depois para a rota correta
+    this.router.navigate(['/refresh']).then(() => {
+      this.router.navigate(['/home', this.urlName, 'chapters', capNumber]);
+    });
   }
 
   onStyleChanges(style: any) {
