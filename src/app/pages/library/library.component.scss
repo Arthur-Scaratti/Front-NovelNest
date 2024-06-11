@@ -34,7 +34,7 @@
     color: var(--lines-color);
     background-color: var(--z-color);
     border-radius: 5px;
-    box-shadow: 2px 2px 3px rgba(255, 49, 49, 0.575);
+    box-shadow: 2px 2px 3px var(--gradient-color-1);
   }
 }
 .grid-item img {

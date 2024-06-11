@@ -32,25 +32,19 @@ export class ChapterComponent {
   capNro: any;
   language: string = 'EN';
   routeSubscription: Subscription | undefined;
-  navigationSubscription: Subscription | undefined;
 
-  constructor() { this.obterCapitulo(); }
+  constructor() {}
   ngOnInit() {
     this.routeSubscription = this.route.paramMap.subscribe(params => {
       this.urlName = params.get('urlName');
       this.obterCapitulo();
+      console.log('passei no subscription')
     });
 
-    this.navigationSubscription = this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.obterCapitulo();
-    });
   }
 
   ngOnDestroy() {
     this.routeSubscription?.unsubscribe();
-    this.navigationSubscription?.unsubscribe();
   }
   
   obterCapitulo(): void {
@@ -78,7 +72,7 @@ export class ChapterComponent {
   navigateToChapter(capNumber: number) {
     // Navegar para a rota temporária e depois para a rota correta
     this.router.navigate(['/refresh']).then(() => {
-      this.router.navigate(['/home', this.urlName, 'chapters', capNumber]);
+    this.router.navigate(['/home', this.urlName, 'chapters', capNumber]);
     });
   }
 

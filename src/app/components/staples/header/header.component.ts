@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { ApicallService } from '../../../services/apicall.service';
 import { ThemeComponent } from '../../theme/theme.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [BreadcrumbComponent, SearchBarComponent, NgIf, ThemeComponent],
+  imports: [BreadcrumbComponent, SearchBarComponent, NgIf, ThemeComponent, RouterLink],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })

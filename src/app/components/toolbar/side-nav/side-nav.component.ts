@@ -1,5 +1,5 @@
-import { Component, Input, ViewChild, ElementRef, AfterViewInit, QueryList, ViewChildren } from '@angular/core';
-import { RouterLink, ActivatedRoute } from '@angular/router';
+import { Component, Input, ViewChild, ElementRef, AfterViewChecked, QueryList, ViewChildren, OnChanges, SimpleChanges, inject } from '@angular/core';
+import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbComponent } from '../../staples/breadcrumb/breadcrumb.component';
 import { ApicallService } from '../../../services/apicall.service';
 import { HttpClient } from '@angular/common/http';
@@ -14,7 +14,8 @@ import { NgClass, NgFor } from '@angular/common';
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss'],
 })
-export class SideNavComponent implements AfterViewInit {
+export class SideNavComponent implements AfterViewChecked, OnChanges {
+  router = inject (Router);
   chapters?: ListChapters[] = [];
   novelName?: string = '';
   urlName: any;
@@ -22,6 +23,7 @@ export class SideNavComponent implements AfterViewInit {
   capNro = this.route.snapshot.paramMap.get('capNro') ?? '';
 
   @ViewChildren('chapterItem') chapterItems!: QueryList<ElementRef>;
+  private shouldScrollToChapter = false;
 
   constructor(
     private apicallservice: ApicallService,
@@ -30,8 +32,15 @@ export class SideNavComponent implements AfterViewInit {
     this.obterCapitulos();
   }
 
-  ngAfterViewInit() {
-    this.scrollToCurrentChapter();
+  ngAfterViewChecked() {
+    if (this.shouldScrollToChapter) {
+      this.scrollToCurrentChapter();
+      this.shouldScrollToChapter = false;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.shouldScrollToChapter = true;
   }
 
   obterCapitulos() {
@@ -40,22 +49,24 @@ export class SideNavComponent implements AfterViewInit {
       if (chapters && chapters.chapters) {
         this.chapters = chapters.chapters.filter(chapter => chapter.language === 'EN');
         this.novelName = chapters.novelName;
-        this.scrollToCurrentChapter();
+        this.shouldScrollToChapter = true;
       }
     });
   }
 
   scrollToCurrentChapter() {
     const currentChapterElement = this.chapterItems.find(
-      item => item.nativeElement.dataset.capnro == parseInt(this.capNro) -1
+      item => item.nativeElement.dataset.capnro == parseInt(this.capNro) - 1
     );
     if (currentChapterElement) {
       currentChapterElement.nativeElement.scrollIntoView({ behavior: 'auto', block: 'start' });
     }
   }
 
-  gerarHref(capNro: number): string {
-    const rotaBase = `/home/${this.urlName}/chapters/${capNro}`;
-    return rotaBase;
+  navigateToChapter(capNumber: number) {
+    // Navegar para a rota temporária e depois para a rota correta
+    this.router.navigate(['/refresh']).then(() => {
+    this.router.navigate(['/home', this.urlName, 'chapters', capNumber]);
+    });
   }
 }
