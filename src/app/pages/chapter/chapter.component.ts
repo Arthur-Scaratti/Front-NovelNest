@@ -1,16 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { ApicallService } from '../../services/apicall.service';
-import { ActivatedRoute, RouterLink, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { chapterContent } from '../../models/chaptercontent';
 import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
-import { Subscription, filter } from 'rxjs';
-import { NgStyle } from '@angular/common';
+import { Observable, Subscription, map } from 'rxjs';
+import { CommonModule, NgIf, NgStyle } from '@angular/common';
 import { CommentsComponent } from '../../components/comments/comments.component';
-import { SimpleChange } from '@angular/core';
+
 @Component({
   selector: 'app-chapter',
   standalone: true,
-  imports: [RouterLink, ToolbarComponent, NgStyle, CommentsComponent],
+  imports: [RouterLink, ToolbarComponent, NgStyle, CommentsComponent, NgIf, CommonModule],
   providers: [ApicallService],
   templateUrl: './chapter.component.html',
   styleUrl: './chapter.component.scss',
@@ -19,7 +19,7 @@ export class ChapterComponent {
   apicallservice = inject (ApicallService);
   router = inject (Router);
   route = inject (ActivatedRoute);
-  content: chapterContent | null = null;
+  content$: Observable<chapterContent | null> | undefined;
   novelName: any;
   title: any;
   previousUrl: string | null = null;
@@ -50,19 +50,19 @@ export class ChapterComponent {
   obterCapitulo(): void {
     this.urlName = this.route.snapshot.paramMap.get('urlName');
     this.capNro = parseInt(this.route.snapshot.paramMap.get('capNro') ?? '');
-    this.apicallservice
+    this.content$ = this.apicallservice
     .getChapterContent(this.urlName, this.capNro, this.language)
-    .subscribe((content) => {
+    .pipe(map((content) => {
       if (content && content.chapterLines) {
-        this.content = content;
-        this.novelName = this.content?.novelName;
-        this.title = this.content?.chapterTitle;
+        this.novelName = content?.novelName;
+        this.title = content?.chapterTitle;
 
         this.previousUrl = this.getChapterUrl(this.capNro - 1);
         this.nextUrl = this.getChapterUrl(this.capNro + 1);
+        return content;
       }
-    });
-
+      return null;
+    }));
   }
 
   private getChapterUrl(capNumber: number): string {
@@ -71,9 +71,9 @@ export class ChapterComponent {
 
   navigateToChapter(capNumber: number) {
     // Navegar para a rota temporária e depois para a rota correta
-    this.router.navigate(['/refresh']).then(() => {
+    //this.router.navigate(['/refresh']).then(() => {
     this.router.navigate(['/home', this.urlName, 'chapters', capNumber]);
-    });
+    //});
   }
 
   onStyleChanges(style: any) {

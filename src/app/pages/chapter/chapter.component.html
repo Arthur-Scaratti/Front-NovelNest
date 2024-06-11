@@ -135,16 +135,21 @@
   </div>
 
   <div id="chapterContent">
-    <h1>{{ title }}</h1>
-    @for (contents of content?.chapterLines; track $index) {
-      <p [ngStyle]="style">{{ contents }}</p>
-    }
+    <ng-container *ngIf="content$ | async as content">
+      <h1>{{ title }}</h1>
+      @for (line of content.chapterLines; track $index) {
+        <p [ngStyle]="style">{{ line }}</p>
+      }
+    </ng-container>
+    
   </div>
 </div>
+<ng-container *ngIf="content$ | async as content">
+  <div class="container_comments">
+    <app-comments></app-comments>
+  </div>
+</ng-container>
 
-<div class="container_comments">
-  <app-comments></app-comments>
-</div>
 
 <div class="container_toolbar">
   <app-toolbar (styleChanges)="onStyleChanges($event)"> </app-toolbar>

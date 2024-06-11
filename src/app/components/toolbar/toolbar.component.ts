@@ -27,15 +27,11 @@ export class ToolbarComponent {
   capNro: any;
   urlName: any;
   urlNovel: any;
-  partesmin: string[] = [];
-  partes: string[] = [];
   isSidebarExpanded = false;
   isOptionbarExpanded = false;
-  styles: any;
-  isLightTheme = false;
-  currentThemeClass: string = '';
-  currentBaseColorClass: string = '';
   availableColors: string[] = ['red', 'blue', 'green', 'purple'];
+
+  @Output() styleChanges = new EventEmitter<any>();
 
   constructor(
     private router: Router,
@@ -43,21 +39,24 @@ export class ToolbarComponent {
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.urlName = this.route.snapshot.paramMap.get('urlName');
-        this.capNro = parseInt(this.route.snapshot.paramMap.get('capNro') ?? '');
-        this.previousUrl = this.getChapterUrl(parseInt(this.capNro, 10) - 1);
-        this.nextUrl = this.getChapterUrl(parseInt(this.capNro, 10) + 1);
-        this.urlNovel = this.getNovelUrl();
+        this.updateNavigationUrls();
       }
     });
   }
-  @Output() styleChanges = new EventEmitter<any>();
+
+  private updateNavigationUrls() {
+    this.urlName = this.route.snapshot.paramMap.get('urlName');
+    this.capNro = parseInt(this.route.snapshot.paramMap.get('capNro') ?? '');
+    this.previousUrl = this.getChapterUrl(parseInt(this.capNro, 10) - 1);
+    this.nextUrl = this.getChapterUrl(parseInt(this.capNro, 10) + 1);
+    this.urlNovel = this.getNovelUrl();
+  }
 
   private getChapterUrl(capNumber: number): string {
     return `/home/${this.urlName}/chapters/${capNumber}`;
   }
 
-  private getNovelUrl() {
+  private getNovelUrl(): string {
     return `/home/${this.urlName}`;
   }
 
@@ -74,17 +73,17 @@ export class ToolbarComponent {
       this.isSidebarExpanded = false;
     }
   }
+
   onStyleChanges(style: any) {
-    this.emittStyleChanges(style);
+    this.emitStyleChanges(style);
   }
 
-  emittStyleChanges(style: any) {
+  emitStyleChanges(style: any) {
     this.styleChanges.emit(style);
   }
+
   navigateToChapter(capNumber: number) {
-    this.router.navigate(['/refresh']).then(() => {
-      this.router.navigate(['/home', this.urlName, 'chapters', capNumber]);
-    });
+    this.router.navigate(['/home', this.urlName, 'chapters', capNumber]);
   }
 
   @HostListener('document:click', ['$event'])
