@@ -1,11 +1,6 @@
 import { Routes } from '@angular/router';
-import { ListnovelComponent } from './pages/listnovel-catalog/listnovel.component';
-import { IndexnovelComponent } from './pages/indexnovel/indexnovel.component';
-import { ChapterComponent } from './pages/chapter/chapter.component';
 import { HomeComponent } from './pages/home/home.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { LoginComponent } from './pages/login/login.component';
-import { LibraryComponent } from './pages/library/library.component';
+
 export const routes: Routes = [
   { 
     path: '', redirectTo: 'home', pathMatch: 'full' 
@@ -15,11 +10,13 @@ export const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    loadComponent: () =>
+      import('./pages/register/register.component').then((x) => x.RegisterComponent),
   },
   {
     path: 'login',
-    component: LoginComponent,
+    loadComponent: () =>
+      import('./pages/login/login.component').then((x) => x.LoginComponent),
   },
   {
     path: 'home',
@@ -27,23 +24,28 @@ export const routes: Routes = [
   },
   {
     path: 'library',
-    component: LibraryComponent,
+    loadComponent:() =>
+      import('./pages/library/library.component').then((x) => x.LibraryComponent),
   },
   {
     path: 'home/:urlName',
-    component: IndexnovelComponent,
+    loadComponent: () =>
+      import('./pages/indexnovel/indexnovel.component').then((x) => x.IndexnovelComponent),
   },
   {
     path: 'home/:urlName/chapters/:capNro',
-    component: ChapterComponent,
+    loadComponent: () =>
+      import('./pages/chapter/chapter.component').then((x) => x.ChapterComponent),
     runGuardsAndResolvers: 'paramsChange',
   },
   {
     path: 'novels',
-    component: ListnovelComponent,
+    loadComponent: () =>
+      import('./pages/listnovel-catalog/listnovel.component').then((x) => x.ListnovelComponent),
   },
   {
     path: 'novels/:tag',
-    component: ListnovelComponent,
+    loadComponent: () =>
+      import('./pages/listnovel-catalog/listnovel.component').then((x) => x.ListnovelComponent),
   },
 ];

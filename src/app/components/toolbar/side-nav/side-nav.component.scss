@@ -1,10 +1,13 @@
 h4 {
-  font-size: large;
+  font-size: medium;
   justify-self: left;
   border-bottom: 1px solid;
   border-image: var(--border-gradient);
   border-image-slice: 1;
   font-family: var(--font-text);
+  margin: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .index {
   padding-right: 15px;

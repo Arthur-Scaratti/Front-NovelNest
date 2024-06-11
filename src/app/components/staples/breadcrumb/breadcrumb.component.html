@@ -1,30 +1,24 @@
 <div class="breadcrumb">
-  <div class="contentbreadcrumb">
-    @for (parte of partes; track $index) {
-      @switch ($index) {
-        @case (0) {}
-        @case (1) {
-          <a href="/{{ partesmin[1] }}">{{ parte }}</a>
+  <div class="contentbreadcrumb" *ngIf="breadcrumb$ | async as breadcrumb">
+    <ng-container *ngFor="let parte of breadcrumb.partes; let i = index">
+      <ng-container [ngSwitch]="i">
+        <ng-container *ngSwitchCase="0"></ng-container>
+        <ng-container *ngSwitchCase="1">
+          <a [routerLink]="['/', breadcrumb.partesmin[1]]">{{ parte }}</a>
           <span> > </span>
-        }
-        @case (2) {
-          <a href="/{{ partesmin[1] }}/{{ partesmin[2] }}"> {{ novelName }}</a>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+          <a [routerLink]="['/', breadcrumb.partesmin[1], breadcrumb.partesmin[2]]">{{ breadcrumb.novelName }}</a>
           <span> > </span>
-        }
-        @case (3) {
-          <a> {{ parte }}</a>
+        </ng-container>
+        <ng-container *ngSwitchCase="3">
+          <a>{{ parte }}</a>
           <span> > </span>
-        }
-        @case (4) {
-          <a
-            href="/{{ partesmin[1] }}/{{ partesmin[2] }}/{{ partesmin[3] }}/{{
-              partesmin[4]
-            }}"
-          >
-            {{ parte }}</a
-          >
-        }
-      }
-    }
+        </ng-container>
+        <ng-container *ngSwitchCase="4">
+          <a [routerLink]="['/', breadcrumb.partesmin[1], breadcrumb.partesmin[2], breadcrumb.partesmin[3], breadcrumb.partesmin[4]]">{{ parte }}</a>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </div>
 </div>

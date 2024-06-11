@@ -18,7 +18,7 @@ import { ViewportScroller } from '@angular/common';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'novelnest_0_2';
+  title = 'novelnest';
   router = inject (Router);
   viewportScroller = inject (ViewportScroller);
   scroll$ = this.router.events.subscribe((event: Event) => {

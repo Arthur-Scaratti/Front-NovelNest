@@ -77,6 +77,9 @@ export class HeaderComponent {
     sessionStorage.removeItem('authToken');
     this.isLoggedIn = false;
     this.userName = null;
+    this.router.navigate(['/refresh']).then(() => {
+      this.router.navigate(['/home']);
+    });
   }
 
   onMouseEnterUser(): void {

@@ -112,6 +112,7 @@
         </div>
         <div *ngIf="showOptionsLogged" class="options">
           <div (click)="navigateTo('/library')">{{ userName }}</div>
+          <div (click)="logout()">Logout</div>
         </div>
       </div>
     </div>
